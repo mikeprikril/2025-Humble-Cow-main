@@ -12,8 +12,8 @@ import frc.robot.Constants;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class TrackTagLeft extends Command {
-  /** Creates a new TrackTagLeft. */
+public class TrackTagRight extends Command {
+  /** Creates a new TrackTagRight. */
   public final SwerveSubsystem swerveDrive;
   
   public final CommandXboxController driverJoystick;
@@ -24,7 +24,7 @@ public class TrackTagLeft extends Command {
   public double angleTarget;
   public double tagNumber;
   
-  public TrackTagLeft(SwerveSubsystem m_swerveDrive, CommandXboxController m_driverJoystick) {
+  public TrackTagRight(SwerveSubsystem m_swerveDrive, CommandXboxController m_driverJoystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     swerveDrive = m_swerveDrive;
     driverJoystick = m_driverJoystick;
@@ -75,17 +75,17 @@ public class TrackTagLeft extends Command {
 
     //define side-to-side speed
     if (tagNumber != -1 && swerveDrive.TrackReefTagY() < 0){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft); //multiply Limelight value by P factor
+      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight); //multiply Limelight value by P factor
     }
     else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
+      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight);
     }
     else tagSpeeds.vyMetersPerSecond = 0;
 
     //define rotational speed
     if (tagNumber != -1){
-            tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
-      }
+      tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+  }
     else tagSpeeds.omegaRadiansPerSecond = 0;
 
     //send values to swervedrive
@@ -99,6 +99,6 @@ public class TrackTagLeft extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !driverJoystick.getHID().getXButton(); //stop once X button released released
+    return !driverJoystick.getHID().getBButton(); //stop once B button released released
   }
 }

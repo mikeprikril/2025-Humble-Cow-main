@@ -30,6 +30,7 @@ import frc.robot.commands.MoveToL1;
 import frc.robot.commands.PickFromTrough;
 import frc.robot.commands.ScoreCoral;
 import frc.robot.commands.TrackTagLeft;
+import frc.robot.commands.TrackTagRight;
 import frc.robot.commands.TransferPosition;
 import frc.robot.commands.Tuck;
 import frc.robot.commands.AutoMode.AutoPick;
@@ -81,6 +82,7 @@ public class RobotContainer
 
   //private final ChangePipeline changePipeline;
   private final TrackTagLeft trackLeft;
+  private final TrackTagRight trackRight;
   private final PickFromTrough pick;
   private final GoBackUp moveUp;
   private final ChangeTurningCommand changeTurning;
@@ -131,6 +133,7 @@ public class RobotContainer
 
     //changePipeline = new ChangePipeline(limelight, driverXbox);
     trackLeft = new TrackTagLeft(drivebase, driverXbox);
+    trackRight = new TrackTagRight(drivebase, driverXbox);
     changeTurning = new ChangeTurningCommand(drivebase, driverXbox);
     driveSideways = new DriveSideways(drivebase, driverXbox);
 
@@ -176,6 +179,8 @@ public class RobotContainer
       driverXbox.start().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       //new JoystickButton(driverXbox, 8).onTrue(new InstantCommand(drivebase::zeroGyro));
       driverXbox.back().onTrue(Commands.none());
+      driverXbox.x().onTrue(trackLeft);
+      driverXbox.b().onTrue(trackRight);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(Commands.none());

@@ -37,11 +37,13 @@ public final class Constants
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
 
-    public static final double ReefForwardSpeed = 0.5;
-    public static final double ReefKp = 0.04;
-    public static final double ReefSpinKp = -0.05;
-    public static final double OffsetForLeft = -6;
-    public static final double OffsetForRight = 6;
+    public static final double ReefForwardSpeed = 1;
+    public static final double ReefKp = -0.05;
+    public static final double ReefSpinKp = 0.02;
+    public static final double OffsetForLeft = 7;
+    public static final double OffsetForRight = 26.3;
+    public static final double tagHeight = -17.5;
+    public static final double TagSlow = 0.25;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
     public static final boolean turningMode = true;

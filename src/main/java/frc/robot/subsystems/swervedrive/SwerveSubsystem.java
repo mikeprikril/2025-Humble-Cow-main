@@ -88,7 +88,7 @@ public class SwerveSubsystem extends SubsystemBase
    */
 
      //Limelight
-     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-tag");
+     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
      NetworkTableEntry tid = table.getEntry("tid");
      NetworkTableEntry tx = table.getEntry("tx");
      NetworkTableEntry ty = table.getEntry("ty");
@@ -170,7 +170,7 @@ public class SwerveSubsystem extends SubsystemBase
   @Override
   public void periodic()
   {
-    double aprilx = tx.getDouble(0.0);
+double aprilx = tx.getDouble(0.0);
 double aprily = ty.getDouble(0.0);
 double aprilarea = ta.getDouble(0.0);
 double aprilID = tid.getDouble(0.0);
