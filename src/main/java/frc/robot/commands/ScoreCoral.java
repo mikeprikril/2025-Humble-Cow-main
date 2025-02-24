@@ -57,14 +57,14 @@ public class ScoreCoral extends Command {
     }
 
     //gripper and drive
-    if (arm.GetArmEncoderPosition() > Constants.ArmConstants.ScorePosition && timer.get() < Constants.ArmConstants.WaitScore){
+    if (arm.GetArmEncoderPosition() > (Constants.ArmConstants.ScorePosition -3) && timer.get() < Constants.ArmConstants.WaitScore){
           arm.GripperSpitOut();
           scoreSpeeds.vxMetersPerSecond = 0; //don't move robot
     }
-    else if (timer.get() > Constants.ArmConstants.WaitScore && timer.get() < Constants.ArmConstants.DriveBackTime){
-        arm.GripperSpitOut();
-        scoreSpeeds.vxMetersPerSecond = Constants.ArmConstants.DriveBackSpeed; //move robot
-    }
+    //else if (timer.get() > Constants.ArmConstants.WaitScore && timer.get() < Constants.ArmConstants.DriveBackTime){
+       // arm.GripperSpitOut();
+       // scoreSpeeds.vxMetersPerSecond = Constants.ArmConstants.DriveBackSpeed; //move robot
+    //}
     else if (timer.get() > Constants.ArmConstants.DriveBackTime){
         arm.StopGripper();
         scoreSpeeds.vxMetersPerSecond = 0; //stop everything 

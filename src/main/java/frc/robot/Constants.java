@@ -99,7 +99,7 @@ public final class Constants
     public static final double troughHeight = 38;
     public static final double L1Height = 38;
     public static final double L2Height = 5.6;
-    public static final double L3Height = 25.1;
+    public static final double L3Height = 26.1;
     public static final double AutoUpSpeed = -.4;
     public static final double AutoDownSpeed = 0.3;
     public static final double BumpDownSpeed = 0.1;
