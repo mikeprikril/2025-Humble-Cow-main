@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.710000000000001,
-        "y": 4.9
+        "x": 7.98819469668898,
+        "y": 4.78466393702269
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.85
       },
       "prevControl": {
-        "x": 8.1315,
-        "y": 3.8397499999999996
+        "x": 7.676886958943018,
+        "y": 4.5766517267222016
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,14 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Move to L4",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -45,7 +52,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "LS",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

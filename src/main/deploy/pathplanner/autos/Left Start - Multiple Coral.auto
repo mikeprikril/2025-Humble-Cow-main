@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Start to Center Reef"
+                  "pathName": "LS to CRR"
                 }
               },
               {
@@ -38,7 +38,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center to Left Human"
+            "pathName": "CR Reef to LBH"
           }
         },
         {
@@ -54,13 +54,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Human to Corner"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Move to L4"
+                  "pathName": "LBH to BLR"
                 }
               }
             ]
@@ -77,11 +71,35 @@
           "data": {
             "name": "Score Coral"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Corner to Left Human"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LBH to BLR"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Track Right Pipe"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Score Coral"
+          }
         }
       ]
     }
   },
   "resetOdom": false,
-  "folder": null,
+  "folder": "Left Start",
   "choreoAuto": false
 }

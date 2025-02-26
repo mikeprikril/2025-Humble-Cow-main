@@ -3,9 +3,27 @@
   "robotLength": 0.94,
   "holonomicMode": true,
   "pathFolders": [
-    "Left Start"
+    "BLR to ____",
+    "BRR to ____",
+    "CBH to ____",
+    "CLR to ____",
+    "CRR to ____",
+    "CS",
+    "CTH to ____",
+    "LBH to ____",
+    "LS",
+    "LTH to ____",
+    "RTH to ____",
+    "RBH to ____",
+    "RS",
+    "TLR to ____",
+    "TRR to ____"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "Center Start",
+    "Left Start",
+    "Right Start"
+  ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

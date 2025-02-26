@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Start to Center Reef"
+                  "pathName": "LS to CRR"
                 }
               },
               {
@@ -45,6 +45,6 @@
     }
   },
   "resetOdom": false,
-  "folder": null,
+  "folder": "Left Start",
   "choreoAuto": false
 }

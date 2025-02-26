@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.2,
-        "y": 3.85
+        "x": 6.162000000000001,
+        "y": 4.181
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.942,
-        "y": 2.8939999999999997
+        "x": 6.120816578352048,
+        "y": 4.930061032399803
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.3375,
-        "y": 1.53875
+        "x": 5.586749999999999,
+        "y": 6.86225
       },
       "prevControl": {
-        "x": 6.942,
-        "y": 1.645999999999999
+        "x": 6.072336783155624,
+        "y": 6.432008551598882
       },
       "nextControl": {
-        "x": 3.444752952160025,
-        "y": 1.0255206850606542
+        "x": 4.906118638023023,
+        "y": 7.465305587924331
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.5,
-        "y": 0.75
+        "x": 1.62825,
+        "y": 7.31075
       },
       "prevControl": {
-        "x": 2.0850041430787347,
-        "y": 1.7249975141407874
+        "x": 2.635325722029596,
+        "y": 7.120910457331163
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,7 +47,14 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Move to Human Loading",
+      "waypointRelativePos": 0.7532374100719411,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -58,10 +65,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 55.0
+    "rotation": -54.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "CRR to ____",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
