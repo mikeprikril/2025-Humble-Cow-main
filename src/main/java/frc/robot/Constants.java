@@ -37,6 +37,9 @@ public final class Constants
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
 
+    public static final int HangMotorID = 14;
+    public static final double HangSpeed = -1;
+    public static final double UnwindHangSpeed = .5;
     public static final double ReefForwardSpeed = 1;
     public static final double ReefKp = -0.05;
     public static final double ReefSpinKp = 0.02;

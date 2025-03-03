@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,6 +25,7 @@ import frc.robot.commands.MoveToL3;
 import frc.robot.commands.MoveToL4;
 import frc.robot.commands.ChangePipeline;
 import frc.robot.commands.GoBackUp;
+import frc.robot.commands.HangCommand;
 import frc.robot.commands.ManualArmCommand;
 import frc.robot.commands.ManualElevatorCommand;
 import frc.robot.commands.MoveToL1;
@@ -43,6 +45,7 @@ import frc.robot.commands.ChangeTurningCommand;
 import frc.robot.commands.DriveSideways;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.HangSubsystem;
 //import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
@@ -67,6 +70,7 @@ public class RobotContainer
   public static final SwerveSubsystem drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve/neo"));
   private final ElevatorSubsystem elevator = new ElevatorSubsystem();
   private final ArmSubsytem arm = new ArmSubsytem();
+  private final HangSubsystem hanger = new HangSubsystem();
   //private final Limelight limelight = new Limelight();
 
   //Commands
@@ -79,6 +83,8 @@ public class RobotContainer
   private final MoveToL4 moveToL4;
   private final ScoreCoral scoreCoral;
   private final Tuck tuck;
+
+  private final HangCommand hangCommand;
 
   private final DriveSideways driveSideways;
 
@@ -140,6 +146,8 @@ public class RobotContainer
     changeTurning = new ChangeTurningCommand(drivebase, driverXbox);
     driveSideways = new DriveSideways(drivebase, driverXbox);
 
+    hangCommand = new HangCommand(hanger, operatorXbox);
+
     transfer = new TransferPosition(elevator, arm, panel);
     moveToL1 = new MoveToL1(elevator, arm, panel);
     moveToL2 = new MoveToL2(elevator, arm, panel);
@@ -173,6 +181,7 @@ public class RobotContainer
     drivebase.setDefaultCommand(standardDrive);
     elevator.setDefaultCommand(manualElevator);
     arm.setDefaultCommand(manualArm);
+    hanger.setDefaultCommand(hangCommand);
     //limelight.setDefaultCommand(changePipeline);
   }
 
@@ -210,7 +219,9 @@ public class RobotContainer
    */
   public Command getAutonomousCommand()
   {
-    return autoChooser.getSelected();
+    //return autoChooser.getSelected();
+    return new PathPlannerAuto("New Auto");//Single Coral Test
+    //return new PathPlannerAuto("Left Start - Multiple Coral");
   }
 
   public void setMotorBrake(boolean brake)

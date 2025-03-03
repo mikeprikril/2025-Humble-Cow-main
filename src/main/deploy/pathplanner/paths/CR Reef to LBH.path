@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.19975,
-        "y": 6.16025
+        "x": 6.2010000000000005,
+        "y": 3.8495
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.205250000000001,
-        "y": 6.189500000000001
+        "x": 6.848336065573771,
+        "y": 2.842532786885245
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.162000000000001,
-        "y": 4.0055
+        "x": 5.346516393442624,
+        "y": 1.6094774590163934
       },
       "prevControl": {
-        "x": 7.430500000000001,
-        "y": 4.024499999999999
+        "x": 5.5876452633097005,
+        "y": 1.6754840353298648
+      },
+      "nextControl": {
+        "x": 2.5339348350583513,
+        "y": 0.8395618559046895
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.5,
+        "y": 0.75
+      },
+      "prevControl": {
+        "x": 2.1697745901639345,
+        "y": 1.4296618852459004
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +49,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Move to L4",
-      "waypointRelativePos": 0,
+      "name": "Move to Human Loading",
+      "waypointRelativePos": 0.7532374100719411,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -49,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 55.0
   },
   "reversed": false,
-  "folder": "CS",
+  "folder": "CRR to ____",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
