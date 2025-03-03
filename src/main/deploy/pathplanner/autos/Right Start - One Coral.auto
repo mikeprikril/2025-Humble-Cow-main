@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LS to CRR"
+                  "pathName": "Far Left Start"
                 }
               },
               {
@@ -34,11 +34,30 @@
           "data": {
             "name": "Score Coral"
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left side to Human"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to Human Loading"
+                }
+              }
+            ]
+          }
         }
       ]
     }
   },
   "resetOdom": false,
-  "folder": "Left Start",
+  "folder": null,
   "choreoAuto": false
 }

@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LS to CRR"
+                  "pathName": "Far Right Start"
                 }
               },
               {
@@ -36,15 +36,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Hide"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right side to Human"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to Human Loading"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": false,
-  "folder": "Left Start",
+  "folder": null,
   "choreoAuto": false
 }

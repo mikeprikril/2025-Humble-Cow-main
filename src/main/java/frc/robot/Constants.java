@@ -46,7 +46,7 @@ public final class Constants
     public static final double OffsetForLeft = 7;
     public static final double OffsetForRight = 26.3;
     public static final double tagHeight = -17.5;
-    public static final double TagSlow = 0.25;
+    public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
     public static final boolean turningMode = true;
@@ -129,7 +129,7 @@ public final class Constants
     public static final int armTopLimitSwitchIO = 4;
 
     public static final int AlmostUpValue = 4; //slow down when close to top
-    public static final int ScorePosition = 15; //arm value when coral is on reef
+    public static final int ScorePosition = 18; //arm value when coral is on reef
     public static final int AlmostDownValue = 60; //slow down when close to tray at bottom
     public static final double ArmVertical = 55.5; //value of encoder when arm is vertically down at tray
     public static final int ArmAtLoading = 70; //arm back against elevator to load from human

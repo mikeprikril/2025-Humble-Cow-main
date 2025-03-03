@@ -41,6 +41,7 @@ import frc.robot.commands.AutoMode.AutoToL4;
 import frc.robot.commands.AutoMode.AutoTransferPosition;
 import frc.robot.commands.AutoMode.LeftTagTrackAuto;
 import frc.robot.commands.AutoMode.RightTagTrackAuto;
+import frc.robot.commands.AutoMode.TuckAuto;
 import frc.robot.commands.ChangeTurningCommand;
 import frc.robot.commands.DriveSideways;
 import frc.robot.subsystems.ArmSubsytem;
@@ -136,6 +137,7 @@ public class RobotContainer
     NamedCommands.registerCommand("Score Coral", new AutoScoreCoral(elevator, arm, drivebase));
     NamedCommands.registerCommand("Track Left Pipe", new LeftTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Track Right Pipe", new RightTagTrackAuto(drivebase));
+    NamedCommands.registerCommand("Tuck Arm", new TuckAuto(elevator, arm));
     //Commands
     manualElevator = new ManualElevatorCommand(elevator, operatorXbox);
     manualArm = new ManualArmCommand(arm, operatorXbox);
@@ -220,8 +222,10 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     //return autoChooser.getSelected();
-    return new PathPlannerAuto("New Auto");//Single Coral Test
-    //return new PathPlannerAuto("Left Start - Multiple Coral");
+    //return new PathPlannerAuto("Left Start - One Coral");//Single Coral from left start
+    return new PathPlannerAuto("Right Start - One Coral");//Single Coral from right start
+    //return new PathPlannerAuto("Center Start - One Coral");//Single Coral starting at center
+  
   }
 
   public void setMotorBrake(boolean brake)

@@ -49,7 +49,7 @@ public class ScoreCoral extends Command {
 
     //arm down slow
     if (arm.GetArmEncoderPosition() < Constants.ArmConstants.ScorePosition){
-      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.3); 
+      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.5); 
     }
     else {
       arm.StopArm();

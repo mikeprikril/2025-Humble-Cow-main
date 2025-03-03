@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Center Start"
+                  "pathName": "LS to CRR"
                 }
               },
               {
@@ -36,28 +36,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Hide"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Tuck Arm"
-                }
-              }
-            ]
+            "pathName": "Hide"
           }
         }
       ]
     }
   },
   "resetOdom": false,
-  "folder": null,
+  "folder": "Left Start",
   "choreoAuto": false
 }
