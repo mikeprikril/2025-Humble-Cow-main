@@ -40,10 +40,10 @@ public final class Constants
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
     public static final double UnwindHangSpeed = .5;
-    public static final double ReefForwardSpeed = 1;
+    public static final double ReefForwardSpeed = .75;
     public static final double ReefKp = -0.05;
     public static final double ReefSpinKp = 0.02;
-    public static final double OffsetForLeft = 7;
+    public static final double OffsetForLeft = 10;
     public static final double OffsetForRight = 26.3;
     public static final double tagHeight = -17.5;
     public static final double TagSlow = 0.8;
@@ -54,7 +54,7 @@ public final class Constants
     public static final int LEDPWMPort = 1; //where are LEDs plugged in
 
     public static final double CreepSpeed = 0.3;
-    public static final double DriveRateLimit = 1;
+    public static final double DriveRateLimit = 2;
   }
 
   public static final class LimelightConstants
@@ -131,6 +131,7 @@ public final class Constants
 
     public static final int AlmostUpValue = 4; //slow down when close to top
     public static final int ScorePosition = 18; //arm value when coral is on reef
+    public static final int AlgaePosition = 30; //arm value when pulling out algae
     public static final int AlmostDownValue = 60; //slow down when close to tray at bottom
     public static final double ArmVertical = 55.5; //value of encoder when arm is vertically down at tray
     public static final int ArmAtLoading = 70; //arm back against elevator to load from human

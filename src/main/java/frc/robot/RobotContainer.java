@@ -9,6 +9,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -59,6 +60,7 @@ import swervelib.SwerveInputStream;
  */
 public class RobotContainer
 {
+  SlewRateLimiter driveRateLimit;
   // Joysticks
   public static final CommandXboxController driverXbox = new CommandXboxController(Constants.OperatorConstants.DriverUSBPort);
   public static final CommandXboxController operatorXbox = new CommandXboxController(Constants.OperatorConstants.OperatorUSBPort);
@@ -129,6 +131,7 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+    driveRateLimit = new SlewRateLimiter(Constants.DrivebaseConstants.DriveRateLimit);
   
     //PathPlanner Named Commands
     NamedCommands.registerCommand("Move to L4", new AutoToL4(elevator, arm));
@@ -172,8 +175,8 @@ public class RobotContainer
 
     Command standardDrive = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.DEADBAND),
-        () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.DEADBAND),
-        () -> MathUtil.applyDeadband(Constants.DrivebaseConstants.SlowDownTurn*-driverXbox.getRightX(), OperatorConstants.DEADBAND));
+        () -> MathUtil.applyDeadband(-driveRateLimit.calculate(driverXbox.getLeftX()), OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(-Constants.DrivebaseConstants.SlowDownTurn*driverXbox.getRightX(), OperatorConstants.DEADBAND));
 
     Command driveFieldOrientedDirectAngle      = drivebase.driveFieldOriented(driveDirectAngle);
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
@@ -222,13 +225,14 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     //return autoChooser.getSelected();
-    //return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
+    return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
     //return new PathPlannerAuto("Left Start - Hide");//Just cross the line and do nothing
     
-    return new PathPlannerAuto("Right Start - Score Coral");//Single Coral from right start
+    //return new PathPlannerAuto("Right Start - Score Coral");//Single Coral from right start
     //return new PathPlannerAuto("Right Start - Hide");//Just cross the line and do nothing
     
     //return new PathPlannerAuto("Center Start - Score Coral");//Single Coral starting at center
+    //return new PathPlannerAuto("Drive Test");
   
   }
 

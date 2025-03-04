@@ -84,7 +84,12 @@ public class TrackTagLeft extends Command {
 
     //define rotational speed
     if (tagNumber != -1){
-            tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+      if (swerveDrive.getHeading().getDegrees() > 0){
+        tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+        }
+        if (swerveDrive.getHeading().getDegrees() < 0){
+        tagSpeeds.omegaRadiansPerSecond = (angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
+        }
       }
     else tagSpeeds.omegaRadiansPerSecond = 0;
 

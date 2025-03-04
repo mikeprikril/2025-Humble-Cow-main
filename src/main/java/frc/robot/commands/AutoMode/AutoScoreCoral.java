@@ -37,6 +37,7 @@ public class AutoScoreCoral extends Command {
   @Override
   public void initialize() {
     timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,11 +55,11 @@ public class AutoScoreCoral extends Command {
     }
     else {
       arm.StopArm();
-      timer.start();
+   
     }
 
     //gripper and drive
-    if (arm.GetArmEncoderPosition() > Constants.ArmConstants.ScorePosition && timer.get() < Constants.ArmConstants.WaitScore){
+    if (arm.GetArmEncoderPosition() > Constants.ArmConstants.ScorePosition){
           arm.GripperSpitOut();
           scoreSpeeds.vxMetersPerSecond = 0; //don't move robot
     }
@@ -82,6 +83,7 @@ public class AutoScoreCoral extends Command {
   @Override
   public void end(boolean interrupted) {
     timer.stop();
+    arm.StopGripper();
 
   }
 

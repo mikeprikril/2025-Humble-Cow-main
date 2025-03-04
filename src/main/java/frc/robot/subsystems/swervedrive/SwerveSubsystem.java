@@ -462,8 +462,8 @@ double aprilID = tid.getDouble(0.0);
     return run(() -> {
       // Make the robot move
       swerveDrive.drive(SwerveMath.scaleTranslation(new Translation2d(
-                            translationX.getAsDouble() * swerveDrive.getMaximumChassisVelocity(),
-                            translationY.getAsDouble() * swerveDrive.getMaximumChassisVelocity()), 0.8),
+                            (translationX.getAsDouble() * swerveDrive.getMaximumChassisVelocity()),
+                            (translationY.getAsDouble() * swerveDrive.getMaximumChassisVelocity())), 0.8),
                         Math.pow(angularRotationX.getAsDouble(), 3) * swerveDrive.getMaximumChassisAngularVelocity(),
                         true,
                         false);

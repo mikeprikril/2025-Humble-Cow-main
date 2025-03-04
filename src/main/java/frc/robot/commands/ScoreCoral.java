@@ -40,6 +40,7 @@ public class ScoreCoral extends Command {
   @Override
   public void initialize() {
     timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,26 +50,23 @@ public class ScoreCoral extends Command {
 
     //arm down slow
     if (arm.GetArmEncoderPosition() < Constants.ArmConstants.ScorePosition){
-      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.5); 
+      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.4);
+      arm.StopGripper(); 
+    }
+    else if (arm.GetArmEncoderPosition() > Constants.ArmConstants.ScorePosition && arm.GetArmEncoderPosition() < Constants.ArmConstants.AlgaePosition){
+      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.2);
+      arm.GripperSpitOut();
     }
     else {
-      arm.StopArm();
-      timer.start();
+    arm.StopArm();
+    arm.GripperSpitOut();
     }
 
-    //gripper and drive
-    if (arm.GetArmEncoderPosition() > (Constants.ArmConstants.ScorePosition -3) && timer.get() < Constants.ArmConstants.WaitScore){
-          arm.GripperSpitOut();
-          scoreSpeeds.vxMetersPerSecond = 0; //don't move robot
+    // drive
+    if (arm.GetArmEncoderPosition() < Constants.ArmConstants.ScorePosition) {
+      scoreSpeeds.vxMetersPerSecond = 0; //don't move if arm isn't down yet
     }
-    //else if (timer.get() > Constants.ArmConstants.WaitScore && timer.get() < Constants.ArmConstants.DriveBackTime){
-       // arm.GripperSpitOut();
-       // scoreSpeeds.vxMetersPerSecond = Constants.ArmConstants.DriveBackSpeed; //move robot
-    //}
-    else if (timer.get() > Constants.ArmConstants.DriveBackTime){
-        arm.StopGripper();
-        scoreSpeeds.vxMetersPerSecond = 0; //stop everything 
-    }
+    else scoreSpeeds.vxMetersPerSecond = Constants.ArmConstants.DriveBackSpeed; //move robot
 
     //send values to swervedrive
     scoreSpeeds.vyMetersPerSecond = 0; //don't move side to side
