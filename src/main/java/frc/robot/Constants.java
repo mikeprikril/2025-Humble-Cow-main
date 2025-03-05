@@ -42,7 +42,7 @@ public final class Constants
     public static final double UnwindHangSpeed = .5;
     public static final double ReefForwardSpeed = .75;
     public static final double ReefKp = -0.05;
-    public static final double ReefSpinKp = 0.02;
+    public static final double ReefSpinKp = 0; //was 0.02;
     public static final double OffsetForLeft = 10;
     public static final double OffsetForRight = 26.3;
     public static final double tagHeight = -17.5;
@@ -105,7 +105,7 @@ public final class Constants
     public static final double troughHeight = 38;
     public static final double L1Height = 38;
     public static final double L2Height = 5.6;
-    public static final double L3Height = 26.1;
+    public static final double L3Height = 27.1;
     public static final double AutoUpSpeed = -.4;
     public static final double AutoDownSpeed = 0.3;
     public static final double BumpDownSpeed = 0.1;

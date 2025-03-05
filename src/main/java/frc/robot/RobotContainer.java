@@ -225,7 +225,8 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     //return autoChooser.getSelected();
-    return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
+    return new PathPlannerAuto("Left Start - One Coral");//Single Coral from left start
+    //return new PathPlannerAuto("Left Start - Many Coral");//Single Coral from left start
     //return new PathPlannerAuto("Left Start - Hide");//Just cross the line and do nothing
     
     //return new PathPlannerAuto("Right Start - Score Coral");//Single Coral from right start

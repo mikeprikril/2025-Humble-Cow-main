@@ -65,6 +65,37 @@
               }
             ]
           }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Grab Coral"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Human to Right side"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to L4"
+                }
+              }
+            ]
+          }
         }
       ]
     }
