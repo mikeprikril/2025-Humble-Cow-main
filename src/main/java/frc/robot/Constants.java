@@ -40,12 +40,12 @@ public final class Constants
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
     public static final double UnwindHangSpeed = .5;
-    public static final double ReefForwardSpeed = .75;
-    public static final double ReefKp = -0.05;
+    public static final double ReefForwardSpeed = .5;
+    public static final double ReefKp = -0.1;
     public static final double ReefSpinKp = 0; //was 0.02;
     public static final double OffsetForLeft = 10;
     public static final double OffsetForRight = 26.3;
-    public static final double tagHeight = -17.5;
+    public static final double tagHeight = -18.5;
     public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
@@ -54,7 +54,7 @@ public final class Constants
     public static final int LEDPWMPort = 1; //where are LEDs plugged in
 
     public static final double CreepSpeed = 0.3;
-    public static final double DriveRateLimit = 2;
+    public static final double DriveRateLimit = 2.5;
   }
 
   public static final class LimelightConstants

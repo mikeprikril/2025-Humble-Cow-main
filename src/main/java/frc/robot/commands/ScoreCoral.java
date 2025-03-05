@@ -54,7 +54,7 @@ public class ScoreCoral extends Command {
       arm.StopGripper(); 
     }
     else if (arm.GetArmEncoderPosition() > Constants.ArmConstants.ScorePosition && arm.GetArmEncoderPosition() < Constants.ArmConstants.AlgaePosition){
-      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.2);
+      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.3);
       arm.GripperSpitOut();
     }
     else {
