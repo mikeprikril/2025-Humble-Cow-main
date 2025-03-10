@@ -24,6 +24,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.MoveToL2;
 import frc.robot.commands.MoveToL3;
 import frc.robot.commands.MoveToL4;
+import frc.robot.commands.CenterTrack;
 import frc.robot.commands.ChangePipeline;
 import frc.robot.commands.GoBackUp;
 import frc.robot.commands.HangCommand;
@@ -94,6 +95,7 @@ public class RobotContainer
   //private final ChangePipeline changePipeline;
   private final TrackTagLeft trackLeft;
   private final TrackTagRight trackRight;
+  private final CenterTrack centerTrack;
   private final PickFromTrough pick;
   private final GoBackUp moveUp;
   private final ChangeTurningCommand changeTurning;
@@ -148,6 +150,7 @@ public class RobotContainer
     //changePipeline = new ChangePipeline(limelight, driverXbox);
     trackLeft = new TrackTagLeft(drivebase, driverXbox);
     trackRight = new TrackTagRight(drivebase, driverXbox);
+    centerTrack = new CenterTrack(drivebase, driverXbox);
     changeTurning = new ChangeTurningCommand(drivebase, driverXbox);
     driveSideways = new DriveSideways(drivebase, driverXbox);
 
@@ -198,6 +201,7 @@ public class RobotContainer
       driverXbox.back().onTrue(Commands.none());
       driverXbox.x().onTrue(trackLeft);
       driverXbox.b().onTrue(trackRight);
+      driverXbox.a().onTrue(centerTrack);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(Commands.none());

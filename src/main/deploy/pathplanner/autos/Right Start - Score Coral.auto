@@ -24,9 +24,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Track Left Pipe"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to L4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Track Left Pipe"
+                }
+              }
+            ]
           }
         },
         {

@@ -48,7 +48,8 @@ public class MoveToL4 extends Command {
       elevator.StopElevator();
     }
     else if (elevator.GetElevatorEncoderPosition() < Constants.ElevatorConstants.AlmostUpValue){
-      elevator.AutoElevator(Constants.ElevatorConstants.AutoUpSpeed);
+      //elevator.AutoElevator(Constants.ElevatorConstants.AutoUpSpeed);
+      elevator.AutoElevator(Constants.ElevatorConstants.FasterUpSpeed);
     }
     else if (elevator.GetElevatorEncoderPosition() > Constants.ElevatorConstants.AlmostUpValue && elevator.GetElevatorEncoderPosition() < Constants.ElevatorConstants.UpLimit){
       elevator.AutoElevator(Constants.ElevatorConstants.AutoUpSpeed*.3);

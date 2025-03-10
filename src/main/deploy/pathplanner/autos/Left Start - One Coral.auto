@@ -24,27 +24,28 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Track Left Pipe"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to L4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Track Left Pipe"
+                }
+              }
+            ]
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Score Coral"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
           }
         },
         {

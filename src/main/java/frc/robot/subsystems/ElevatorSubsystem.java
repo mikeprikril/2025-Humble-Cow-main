@@ -120,7 +120,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Elevator Encoder Value", -elevatorEncoder.getPosition()); //show elevator encoder on dashboard
-    SmartDashboard.putBoolean("Elevator Bottom Limit", elevatorBottomLimitSwitch.get());
+    SmartDashboard.putBoolean("Elevator Bottom Limit", !elevatorBottomLimitSwitch.get());
     SmartDashboard.putBoolean("Elevator Top Limit", -elevatorEncoder.getPosition() > Constants.ElevatorConstants.UpLimit);
     SmartDashboard.putNumber("Left Elevator Current ", leftElevatorMotor.getOutputCurrent()); //display motor current draw in amps
     SmartDashboard.putNumber("Right Elevator Current ", rightElevatorMotor.getOutputCurrent());

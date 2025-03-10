@@ -24,9 +24,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Track Left Pipe"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move to L4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Track Left Pipe"
+                }
+              }
+            ]
           }
         },
         {
@@ -55,6 +68,25 @@
                 "type": "path",
                 "data": {
                   "pathName": "LBH to BLR"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Grab Coral"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Move to L4"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -100,6 +132,6 @@
     }
   },
   "resetOdom": false,
-  "folder": "Left Start",
+  "folder": null,
   "choreoAuto": false
 }

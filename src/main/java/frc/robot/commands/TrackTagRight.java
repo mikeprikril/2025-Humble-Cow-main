@@ -74,12 +74,12 @@ public class TrackTagRight extends Command {
     else tagSpeeds.vxMetersPerSecond = 0;
 
     //define side-to-side speed
-    if (tagNumber != -1 && swerveDrive.TrackReefTagY() < 0){
+    if (tagNumber != -1){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight); //multiply Limelight value by P factor
     }
-    else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
+   /*  else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight);
-    }
+    }*/
     else tagSpeeds.vyMetersPerSecond = 0;
 
     //define rotational speed
@@ -88,7 +88,7 @@ public class TrackTagRight extends Command {
       tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
       }
       if (swerveDrive.getHeading().getDegrees() < 0){
-      tagSpeeds.omegaRadiansPerSecond = (angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
+      tagSpeeds.omegaRadiansPerSecond = -(angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
       }
 }
     else tagSpeeds.omegaRadiansPerSecond = 0;

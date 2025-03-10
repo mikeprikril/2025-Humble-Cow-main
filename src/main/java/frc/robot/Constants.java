@@ -39,13 +39,14 @@ public final class Constants
 
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
-    public static final double UnwindHangSpeed = .5;
-    public static final double ReefForwardSpeed = .5;
-    public static final double ReefKp = -0.1;
+    public static final double UnwindHangSpeed = 1;
+    public static final double ReefForwardSpeed = .75;
+    public static final double ReefKp = -0.04; //was -0.04
     public static final double ReefSpinKp = 0; //was 0.02;
-    public static final double OffsetForLeft = 10;
-    public static final double OffsetForRight = 26.3;
-    public static final double tagHeight = -18.5;
+    public static final double OffsetForLeft = 5.7;
+    public static final double OffsetForRight = 25;
+    public static final double OffsetForCenter = 18.25;
+    public static final double tagHeight = -18.75;
     public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
@@ -96,17 +97,19 @@ public final class Constants
 
     public static final int AlmostDownValue = 8; //slow down when close to bottom
     public static final double AlmostUpValue = 59; //slow down when close to top
-    public static final double UpLimit = 64; //top limit for elevator
+    public static final double UpLimit = 63; //top limit for elevator
     public static final double SlowDown = 0.2; //slow down to 20% if close to limit
 
-    public static final double deadband = 1.5;
+    public static final double deadband = 1;
     public static final double TransferHeight = 44;
     public static final double SafeHeight = 35; //when can arm start moving down in auto feed
     public static final double troughHeight = 38;
-    public static final double L1Height = 38;
-    public static final double L2Height = 5.6;
+    public static final double L1Height = 45;
+    public static final double L2Height = 5.65;
     public static final double L3Height = 27.1;
+    public static final double L4Height = 60.2;
     public static final double AutoUpSpeed = -.4;
+    public static final double FasterUpSpeed = -.6;
     public static final double AutoDownSpeed = 0.3;
     public static final double BumpDownSpeed = 0.1;
     public static final double HoldElevatorSpeed = 0;
@@ -135,7 +138,7 @@ public final class Constants
     public static final int AlmostDownValue = 60; //slow down when close to tray at bottom
     public static final double ArmVertical = 55.5; //value of encoder when arm is vertically down at tray
     public static final int ArmAtLoading = 70; //arm back against elevator to load from human
-    public static final int ArmL1 = 45;
+    public static final double ArmL1 = 36.7;
     public static final int CloseSlow = 5; //when you get near the endpoint slow down
     public static final double deadband = 1.5; //arm location deadband
     public static final double SlowDown = 0.2; //slow down by 20% if close to limit
@@ -157,7 +160,7 @@ public final class Constants
 
     public static final double WaitScore = 0.7; //time gripper spits out before backing up
     public static final double DriveBackTime = 1.2; //time robot drives back after scoring
-    public static final double DriveBackSpeed = -0.4; //speed that robot bumps back after scoring
+    public static final double DriveBackSpeed = -0.7; //speed that robot bumps back after scoring
   }
 
 }

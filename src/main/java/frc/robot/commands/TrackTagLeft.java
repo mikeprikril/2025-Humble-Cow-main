@@ -23,6 +23,7 @@ public class TrackTagLeft extends Command {
 
   public double angleTarget;
   public double tagNumber;
+  public double XTarget;
   
   public TrackTagLeft(SwerveSubsystem m_swerveDrive, CommandXboxController m_driverJoystick) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,6 +42,7 @@ public class TrackTagLeft extends Command {
     timer.reset();
     timer.start();
     angleTarget = 0;
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -67,6 +69,9 @@ public class TrackTagLeft extends Command {
       angleTarget = -60;
     }
 
+    //calculate X target
+    XTarget = (swerveDrive.TrackReefTagY() + 1.91) /0.697;
+
     //define forward speed
     if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.tagHeight && tagNumber != -1){
     tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
@@ -74,16 +79,18 @@ public class TrackTagLeft extends Command {
     else tagSpeeds.vxMetersPerSecond = 0;
 
     //define side-to-side speed
-    if (tagNumber != -1 && swerveDrive.TrackReefTagY() < 0){
+    if (tagNumber != -1){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft); //multiply Limelight value by P factor
+      //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + XTarget);
     }
-    else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
+
+    /*else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
-    }
+    }*/
     else tagSpeeds.vyMetersPerSecond = 0;
 
     //define rotational speed
-    if (tagNumber != -1){
+    if (tagNumber != -1 && tagNumber != 0){
       if (swerveDrive.getHeading().getDegrees() > 0){
         tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
         }

@@ -97,6 +97,12 @@ public class SwerveSubsystem extends SubsystemBase
      NetworkTableEntry ty = table.getEntry("ty");
      NetworkTableEntry ta = table.getEntry("ta");
 
+     NetworkTable secondTable = NetworkTableInstance.getDefault().getTable("limelight-behind");
+     NetworkTableEntry behindtid = secondTable.getEntry("tid");
+     NetworkTableEntry behindtx = secondTable.getEntry("tx");
+     NetworkTableEntry behindty = secondTable.getEntry("ty");
+     NetworkTableEntry behindta = secondTable.getEntry("ta");
+
 
   public SwerveSubsystem(File directory)
   {
@@ -156,6 +162,21 @@ public class SwerveSubsystem extends SubsystemBase
     vision = new Vision(swerveDrive::getPose, swerveDrive.field);
   }
 
+  public double TrackHumanTagX(){
+    return behindtx.getDouble(0.0);
+  }
+
+  public double TrackHumanTagY(){
+    return behindty.getDouble(0.0);
+  }
+
+  public double TrackHumanTagArea(){
+    return behindta.getDouble(0.0);
+  }
+
+  public double GetHumanTagID(){
+    return behindtid.getDouble(0);
+  }
   public double TrackReefTagX(){
     return tx.getDouble(0.0);
   }
@@ -180,12 +201,22 @@ double aprily = ty.getDouble(0.0);
 double aprilarea = ta.getDouble(0.0);
 double aprilID = tid.getDouble(0.0);
 
+double behindaprilx = behindtx.getDouble(0.0);
+double behindaprily = behindty.getDouble(0.0);
+double behindaprilarea = behindta.getDouble(0.0);
+double behindaprilID = behindtid.getDouble(0.0);
+
     SmartDashboard.putNumber("Robot Heading Degrees", getHeading().getDegrees());
     SmartDashboard.putNumber("LimeLight X Value", aprilx);
     SmartDashboard.putNumber("LimeLight Y Value", aprily);
     SmartDashboard.putNumber("LimeLight Target Area", aprilarea);
     SmartDashboard.putNumber("Reef AprilTag ID", aprilID);
     
+    SmartDashboard.putNumber("Behind LimeLight X Value", behindaprilx);
+    SmartDashboard.putNumber("Behind LimeLight Y Value", behindaprily);
+    SmartDashboard.putNumber("Behind LimeLight Target Area", behindaprilarea);
+    SmartDashboard.putNumber("Human AprilTag ID", behindaprilID);
+
     // When vision is enabled we must manually update odometry in SwerveDrive
     if (visionDriveTest)
     {

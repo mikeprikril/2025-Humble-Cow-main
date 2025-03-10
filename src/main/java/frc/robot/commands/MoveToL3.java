@@ -51,7 +51,8 @@ public class MoveToL3 extends Command {
       elevator.AutoElevator(Constants.ElevatorConstants.AutoDownSpeed);
     }
     else if (arm.GetArmEncoderPosition() < Constants.ArmConstants.armFlat && elevator.GetElevatorEncoderPosition() < (Constants.ElevatorConstants.L3Height - Constants.ElevatorConstants.deadband)){
-      elevator.AutoElevator(Constants.ElevatorConstants.AutoUpSpeed);
+      //elevator.AutoElevator(Constants.ElevatorConstants.AutoUpSpeed);
+      elevator.AutoElevator(Constants.ElevatorConstants.FasterUpSpeed);
     }
     //else elevator.StopElevator();
     else elevator.AutoElevator(Constants.ElevatorConstants.HoldElevatorSpeed);
