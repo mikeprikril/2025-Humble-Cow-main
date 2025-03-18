@@ -70,17 +70,11 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.5
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Grab Coral"
-          }
-        },
-        {
-          "type": "parallel",
+          "type": "deadline",
           "data": {
             "commands": [
               {
@@ -90,12 +84,50 @@
                 }
               },
               {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Grab Coral"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Move to L4"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Track Left Pipe"
+                }
+              },
+              {
                 "type": "named",
                 "data": {
                   "name": "Move to L4"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Score Coral"
           }
         }
       ]

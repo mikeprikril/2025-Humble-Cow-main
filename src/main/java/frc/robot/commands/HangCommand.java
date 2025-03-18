@@ -38,6 +38,14 @@ public class HangCommand extends Command {
     }
     else hang.StopHangMotor();
 
+  if (operatorController.getHID().getRawButton(2)){
+    hang.RotateHangBar(.5);
+  }
+
+  if (operatorController.getHID().getRawButton(3)){
+    hang.RotateHangBar(10);
+  }
+
   }
 
   // Called once the command ends or is interrupted.

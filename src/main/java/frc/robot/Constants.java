@@ -40,16 +40,23 @@ public final class Constants
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
     public static final double UnwindHangSpeed = 1;
-    public static final double ReefForwardSpeed = .75;
-    public static final double ReefKp = -0.04; //was -0.04
+    public static final double ReefForwardSpeed = 1;//was 0.75
+    public static final double ReefKp = -0.045; //was -0.04
     public static final double ReefSpinKp = 0; //was 0.02;
+    public static final double OffsetCenterCamforLeft = -12;
+    public static final double OffsetCenterCamforRight = 12.5;
     public static final double OffsetForLeft = 5.7;
     public static final double OffsetForRight = 25;
     public static final double OffsetForCenter = 18.25;
     public static final double tagHeight = -18.75;
+    public static final double CenterCamtagHeight = -14.5;
     public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
+    public static final double CoralStationDriveBackSpeed = 2; //this might be very fast
+    public static final double CoralStationSideKp = .08;
+    public static final double CoralStationSpinKp = 0;
+    public static final double CoralStationOffset = 5;
     public static final boolean turningMode = true;
     public static final double SlowDownTurn = .8; //slow down turning speed
     public static final int LEDPWMPort = 1; //where are LEDs plugged in
@@ -108,9 +115,11 @@ public final class Constants
     public static final double L2Height = 5.65;
     public static final double L3Height = 27.1;
     public static final double L4Height = 60.2;
+    public static final double DontTipHeight = 30; //Height where we can drive fast because we wont tip
+    public static final double DontTipFactor = 0.5; //robot slows down by this much when elevator is high
     public static final double AutoUpSpeed = -.4;
     public static final double FasterUpSpeed = -.6;
-    public static final double AutoDownSpeed = 0.3;
+    public static final double AutoDownSpeed = 0.45;
     public static final double BumpDownSpeed = 0.1;
     public static final double HoldElevatorSpeed = 0;
 
@@ -143,9 +152,9 @@ public final class Constants
     public static final double deadband = 1.5; //arm location deadband
     public static final double SlowDown = 0.2; //slow down by 20% if close to limit
 
-    public static final double ArmDownSpeed = -0.4;
-    public static final double ArmUpSpeed = 0.4;
-    public static final double ArmUpFast = 0.5;
+    public static final double ArmDownSpeed = -0.6;
+    public static final double ArmUpSpeed = 0.6;
+    public static final double ArmUpFast = 0.65;
     public static final double armFlat = 35;
 
     public static final double GripperInSpeed = 1;

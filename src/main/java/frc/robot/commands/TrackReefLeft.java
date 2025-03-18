@@ -5,8 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -14,8 +14,8 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class TrackTagRight extends Command {
-  /** Creates a new TrackTagRight. */
+public class TrackReefLeft extends Command {
+  /** Creates a new TrackTagLeft. */
   public final SwerveSubsystem swerveDrive;
   
   public final CommandXboxController driverJoystick;
@@ -25,8 +25,9 @@ public class TrackTagRight extends Command {
 
   public double angleTarget;
   public double tagNumber;
+  public double XTarget;
   
-  public TrackTagRight(SwerveSubsystem m_swerveDrive, CommandXboxController m_driverJoystick) {
+  public TrackReefLeft(SwerveSubsystem m_swerveDrive, CommandXboxController m_driverJoystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     swerveDrive = m_swerveDrive;
     driverJoystick = m_driverJoystick;
@@ -43,6 +44,7 @@ public class TrackTagRight extends Command {
     timer.reset();
     timer.start();
     angleTarget = 0;
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -69,36 +71,41 @@ public class TrackTagRight extends Command {
       angleTarget = -60;
     }
 
+    //calculate X target
+    XTarget = (swerveDrive.TrackReefTagY() + 385) /-1.08;
+
     //define forward speed
-    if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.tagHeight && tagNumber != -1){
+    if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.CenterCamtagHeight && tagNumber != -1){
     tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
     }
     else tagSpeeds.vxMetersPerSecond = 0;
 
     //define side-to-side speed
     if (tagNumber != -1){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight); //multiply Limelight value by P factor
-    if (tagSpeeds.vyMetersPerSecond==0){
+      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetCenterCamforLeft); //multiply Limelight value by P factor
+      //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + -XTarget);
+      if (swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetCenterCamforLeft < 0.2){
         RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 1);
       }
       else{
         RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 0);
       }
     }
-   /*  else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForRight);
+
+    /*else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
+      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
     }*/
     else tagSpeeds.vyMetersPerSecond = 0;
 
     //define rotational speed
-    if (tagNumber != -1){
+    if (tagNumber != -1 && tagNumber != 0){
       if (swerveDrive.getHeading().getDegrees() > 0){
-      tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+        tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+        }
+        if (swerveDrive.getHeading().getDegrees() < 0){
+        tagSpeeds.omegaRadiansPerSecond = (angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
+        }
       }
-      if (swerveDrive.getHeading().getDegrees() < 0){
-      tagSpeeds.omegaRadiansPerSecond = -(angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
-      }
-}
     else tagSpeeds.omegaRadiansPerSecond = 0;
 
     //send values to swervedrive
@@ -112,6 +119,6 @@ public class TrackTagRight extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !driverJoystick.getHID().getBButton(); //stop once B button released released
+    return !driverJoystick.getHID().getXButton(); //stop once X button released released
   }
 }

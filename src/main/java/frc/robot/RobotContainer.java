@@ -33,6 +33,9 @@ import frc.robot.commands.ManualElevatorCommand;
 import frc.robot.commands.MoveToL1;
 import frc.robot.commands.PickFromTrough;
 import frc.robot.commands.ScoreCoral;
+import frc.robot.commands.TrackHumanLoading;
+import frc.robot.commands.TrackReefLeft;
+import frc.robot.commands.TrackReefRight;
 import frc.robot.commands.TrackTagLeft;
 import frc.robot.commands.TrackTagRight;
 import frc.robot.commands.TransferPosition;
@@ -52,6 +55,7 @@ import frc.robot.subsystems.HangSubsystem;
 //import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+
 import swervelib.SwerveInputStream;
 
 /**
@@ -62,6 +66,8 @@ import swervelib.SwerveInputStream;
 public class RobotContainer
 {
   SlewRateLimiter driveRateLimit;
+  double DriveChillValue;
+
   // Joysticks
   public static final CommandXboxController driverXbox = new CommandXboxController(Constants.OperatorConstants.DriverUSBPort);
   public static final CommandXboxController operatorXbox = new CommandXboxController(Constants.OperatorConstants.OperatorUSBPort);
@@ -93,8 +99,11 @@ public class RobotContainer
   private final DriveSideways driveSideways;
 
   //private final ChangePipeline changePipeline;
-  private final TrackTagLeft trackLeft;
-  private final TrackTagRight trackRight;
+  //private final TrackTagLeft trackLeft;
+  private final TrackReefLeft trackReefLeft;
+  //private final TrackTagRight trackRight;
+  private final TrackReefRight trackReefRight;
+  private final TrackHumanLoading trackCoralStation;
   private final CenterTrack centerTrack;
   private final PickFromTrough pick;
   private final GoBackUp moveUp;
@@ -134,6 +143,11 @@ public class RobotContainer
   public RobotContainer()
   {
     driveRateLimit = new SlewRateLimiter(Constants.DrivebaseConstants.DriveRateLimit);
+
+    if (elevator.IsElevatorTooHigh() == true){
+      DriveChillValue = Constants.ElevatorConstants.DontTipFactor;
+    }
+    else DriveChillValue = 1;
   
     //PathPlanner Named Commands
     NamedCommands.registerCommand("Move to L4", new AutoToL4(elevator, arm));
@@ -148,8 +162,11 @@ public class RobotContainer
     manualArm = new ManualArmCommand(arm, operatorXbox);
 
     //changePipeline = new ChangePipeline(limelight, driverXbox);
-    trackLeft = new TrackTagLeft(drivebase, driverXbox);
-    trackRight = new TrackTagRight(drivebase, driverXbox);
+    //trackLeft = new TrackTagLeft(drivebase, driverXbox);
+    trackReefLeft = new TrackReefLeft(drivebase, driverXbox);
+    //trackRight = new TrackTagRight(drivebase, driverXbox);
+    trackReefRight = new TrackReefRight(drivebase, driverXbox);
+    trackCoralStation = new TrackHumanLoading(drivebase, driverXbox);
     centerTrack = new CenterTrack(drivebase, driverXbox);
     changeTurning = new ChangeTurningCommand(drivebase, driverXbox);
     driveSideways = new DriveSideways(drivebase, driverXbox);
@@ -177,8 +194,8 @@ public class RobotContainer
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
     Command standardDrive = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.DEADBAND),
-        () -> MathUtil.applyDeadband(-driveRateLimit.calculate(driverXbox.getLeftX()), OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(-driverXbox.getLeftY()*DriveChillValue, OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(-driveRateLimit.calculate(driverXbox.getLeftX())*DriveChillValue, OperatorConstants.DEADBAND),
         () -> MathUtil.applyDeadband(-Constants.DrivebaseConstants.SlowDownTurn*driverXbox.getRightX(), OperatorConstants.DEADBAND));
 
     Command driveFieldOrientedDirectAngle      = drivebase.driveFieldOriented(driveDirectAngle);
@@ -199,9 +216,9 @@ public class RobotContainer
       driverXbox.start().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       //new JoystickButton(driverXbox, 8).onTrue(new InstantCommand(drivebase::zeroGyro));
       driverXbox.back().onTrue(Commands.none());
-      driverXbox.x().onTrue(trackLeft);
-      driverXbox.b().onTrue(trackRight);
-      driverXbox.a().onTrue(centerTrack);
+      driverXbox.x().onTrue(trackReefLeft);
+      driverXbox.b().onTrue(trackReefRight);
+      //driverXbox.a().onTrue(centerTrack);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(Commands.none());
@@ -229,16 +246,13 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     //return autoChooser.getSelected();
-    return new PathPlannerAuto("Left Start - One Coral");//Single Coral from left start
-    //return new PathPlannerAuto("Left Start - Many Coral");//Single Coral from left start
+    return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
     //return new PathPlannerAuto("Left Start - Hide");//Just cross the line and do nothing
     
     //return new PathPlannerAuto("Right Start - Score Coral");//Single Coral from right start
     //return new PathPlannerAuto("Right Start - Hide");//Just cross the line and do nothing
     
     //return new PathPlannerAuto("Center Start - Score Coral");//Single Coral starting at center
-    //return new PathPlannerAuto("Drive Test");
-  
   }
 
   public void setMotorBrake(boolean brake)

@@ -9,6 +9,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,6 +17,7 @@ public class HangSubsystem extends SubsystemBase {
   /** Creates a new HangSubsystem. */
 
   SparkMax hangMotor;
+  Servo rotatorServo;
 
   SparkMaxConfig hangMotorConfig = new SparkMaxConfig();
 
@@ -26,6 +28,8 @@ public class HangSubsystem extends SubsystemBase {
     hangMotor = new SparkMax(Constants.DrivebaseConstants.HangMotorID, MotorType.kBrushless);
     hangMotor.configure(hangMotorConfig, null, null);
 
+    rotatorServo = new Servo(2);
+    rotatorServo.setBoundsMicroseconds(2000, 1800, 1500, 1200, 0);
   }
 
   public void HangRobot(){
@@ -39,6 +43,11 @@ public class HangSubsystem extends SubsystemBase {
 public void StopHangMotor(){
   hangMotor.stopMotor();
 }
+
+public void RotateHangBar(double ServoPosition){
+rotatorServo.setPosition(ServoPosition);
+}
+
 
   @Override
   public void periodic() {

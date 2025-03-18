@@ -97,7 +97,7 @@ public class SwerveSubsystem extends SubsystemBase
      NetworkTableEntry ty = table.getEntry("ty");
      NetworkTableEntry ta = table.getEntry("ta");
 
-     NetworkTable secondTable = NetworkTableInstance.getDefault().getTable("limelight-behind");
+     NetworkTable secondTable = NetworkTableInstance.getDefault().getTable("limelight-back");
      NetworkTableEntry behindtid = secondTable.getEntry("tid");
      NetworkTableEntry behindtx = secondTable.getEntry("tx");
      NetworkTableEntry behindty = secondTable.getEntry("ty");
@@ -201,10 +201,10 @@ double aprily = ty.getDouble(0.0);
 double aprilarea = ta.getDouble(0.0);
 double aprilID = tid.getDouble(0.0);
 
-double behindaprilx = behindtx.getDouble(0.0);
-double behindaprily = behindty.getDouble(0.0);
-double behindaprilarea = behindta.getDouble(0.0);
-double behindaprilID = behindtid.getDouble(0.0);
+//double behindaprilx = behindtx.getDouble(0.0);
+//ouble behindaprily = behindty.getDouble(0.0);
+//ouble behindaprilarea = behindta.getDouble(0.0);
+//double behindaprilID = behindtid.getDouble(0.0);
 
     SmartDashboard.putNumber("Robot Heading Degrees", getHeading().getDegrees());
     SmartDashboard.putNumber("LimeLight X Value", aprilx);
@@ -212,10 +212,10 @@ double behindaprilID = behindtid.getDouble(0.0);
     SmartDashboard.putNumber("LimeLight Target Area", aprilarea);
     SmartDashboard.putNumber("Reef AprilTag ID", aprilID);
     
-    SmartDashboard.putNumber("Behind LimeLight X Value", behindaprilx);
-    SmartDashboard.putNumber("Behind LimeLight Y Value", behindaprily);
-    SmartDashboard.putNumber("Behind LimeLight Target Area", behindaprilarea);
-    SmartDashboard.putNumber("Human AprilTag ID", behindaprilID);
+    SmartDashboard.putNumber("Rear LimeLight X Value", behindtx.getDouble(0));
+    SmartDashboard.putNumber("Rear LimeLight Y Value", behindty.getDouble(0));
+    SmartDashboard.putNumber("Rear LimeLight Target Area", behindta.getDouble(0));
+    SmartDashboard.putNumber("Coral Station AprilTag ID", behindtid.getDouble(0));
 
     // When vision is enabled we must manually update odometry in SwerveDrive
     if (visionDriveTest)

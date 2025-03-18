@@ -46,23 +46,25 @@ public class TrackHumanLoading extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    tagNumber = swerveDrive.GetTagID();
+    tagNumber = swerveDrive.GetHumanTagID();
 
     if (tagNumber == 12 || tagNumber == 2){
-      angleTarget = 225;
+      angleTarget = 55;
     }
     if (tagNumber == 13 || tagNumber == 1){
-      angleTarget = 135;
+      angleTarget = -55;
     }
 
     //define forward speed
-    loadingSpeeds.vxMetersPerSecond = -driverJoystick.getLeftY()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
+    //loadingSpeeds.vxMetersPerSecond = -driverJoystick.getLeftY()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
+    loadingSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.CoralStationDriveBackSpeed;
 
     //define side-to-side speed
-    loadingSpeeds.vyMetersPerSecond = -driverJoystick.getLeftX()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
-    
+    //loadingSpeeds.vyMetersPerSecond = -driverJoystick.getLeftX()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
+    loadingSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.CoralStationSideKp*(swerveDrive.TrackHumanTagX() + Constants.DrivebaseConstants.CoralStationOffset);
+
     //define rotational speed
-    loadingSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees())*Constants.DrivebaseConstants.ReefSpinKp;
+    loadingSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees())*Constants.DrivebaseConstants.CoralStationSpinKp;
 
     //send values to swervedrive
     swerveDrive.drive(loadingSpeeds); 
@@ -75,6 +77,6 @@ public class TrackHumanLoading extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return !driverJoystick.getHID().getAButton(); //stop once A button released released
   }
 }

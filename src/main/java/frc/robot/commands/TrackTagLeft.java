@@ -6,9 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -82,6 +85,12 @@ public class TrackTagLeft extends Command {
     if (tagNumber != -1){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft); //multiply Limelight value by P factor
       //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + XTarget);
+      if (tagSpeeds.vyMetersPerSecond==0){
+        RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 1);
+      }
+      else{
+        RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 0);
+      }
     }
 
     /*else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){

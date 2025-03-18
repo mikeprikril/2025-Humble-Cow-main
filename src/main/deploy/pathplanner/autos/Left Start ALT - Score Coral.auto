@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Far Left Start"
+                  "pathName": "Close Right Start"
                 }
               },
               {
@@ -55,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left side to Human"
+                  "pathName": "Close Right side to Human"
                 }
               },
               {
@@ -70,7 +70,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.5
           }
         },
         {
@@ -80,7 +80,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Human to Flat Side"
+                  "pathName": "Human to Far Right side"
                 }
               },
               {
