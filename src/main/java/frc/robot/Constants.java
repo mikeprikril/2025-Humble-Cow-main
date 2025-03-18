@@ -91,6 +91,7 @@ public final class Constants
     public static final int GetCoralButton = 7;
     public static final int TuckArmButton = 6;
     public static final int ScoreCoralButton = 5;
+    public static final int ScoreAndBackUpFastButton = 9;
 
   }
 

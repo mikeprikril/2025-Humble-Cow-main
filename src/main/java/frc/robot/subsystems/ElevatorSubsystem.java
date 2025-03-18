@@ -113,8 +113,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     return elevatorBottomLimitSwitch.get();
    }
 
-  public boolean IsElevatorTooHigh(){
-    return -elevatorEncoder.getPosition() > Constants.ElevatorConstants.DontTipHeight;
+  public double IsElevatorTooHigh(){
+    if (-elevatorEncoder.getPosition() > Constants.ElevatorConstants.DontTipHeight){
+      return Constants.ElevatorConstants.DontTipFactor;
+    }
+    else return 1;
   }
 
 
@@ -126,7 +129,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Elevator Encoder Value", -elevatorEncoder.getPosition()); //show elevator encoder on dashboard
     SmartDashboard.putBoolean("Elevator Bottom Limit", !elevatorBottomLimitSwitch.get());
     SmartDashboard.putBoolean("Elevator Top Limit", -elevatorEncoder.getPosition() > Constants.ElevatorConstants.UpLimit);
-    SmartDashboard.putBoolean("Is Elevator Too High", IsElevatorTooHigh());
+    SmartDashboard.putBoolean("Is Elevator Too High", -elevatorEncoder.getPosition() > Constants.ElevatorConstants.DontTipHeight);
     SmartDashboard.putNumber("Left Elevator Current ", leftElevatorMotor.getOutputCurrent()); //display motor current draw in amps
     SmartDashboard.putNumber("Right Elevator Current ", rightElevatorMotor.getOutputCurrent());
 

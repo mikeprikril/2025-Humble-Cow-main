@@ -33,6 +33,7 @@ import frc.robot.commands.ManualElevatorCommand;
 import frc.robot.commands.MoveToL1;
 import frc.robot.commands.PickFromTrough;
 import frc.robot.commands.ScoreCoral;
+import frc.robot.commands.ScoreCoralFast;
 import frc.robot.commands.TrackHumanLoading;
 import frc.robot.commands.TrackReefLeft;
 import frc.robot.commands.TrackReefRight;
@@ -66,7 +67,6 @@ import swervelib.SwerveInputStream;
 public class RobotContainer
 {
   SlewRateLimiter driveRateLimit;
-  double DriveChillValue;
 
   // Joysticks
   public static final CommandXboxController driverXbox = new CommandXboxController(Constants.OperatorConstants.DriverUSBPort);
@@ -92,6 +92,7 @@ public class RobotContainer
   private final MoveToL3 moveToL3;
   private final MoveToL4 moveToL4;
   private final ScoreCoral scoreCoral;
+  private final ScoreCoralFast scoreFast;
   private final Tuck tuck;
 
   private final HangCommand hangCommand;
@@ -144,10 +145,6 @@ public class RobotContainer
   {
     driveRateLimit = new SlewRateLimiter(Constants.DrivebaseConstants.DriveRateLimit);
 
-    if (elevator.IsElevatorTooHigh() == true){
-      DriveChillValue = Constants.ElevatorConstants.DontTipFactor;
-    }
-    else DriveChillValue = 1;
   
     //PathPlanner Named Commands
     NamedCommands.registerCommand("Move to L4", new AutoToL4(elevator, arm));
@@ -179,6 +176,7 @@ public class RobotContainer
     moveToL3 = new MoveToL3(elevator, arm, panel);
     moveToL4 = new MoveToL4(elevator, arm, panel);
     scoreCoral = new ScoreCoral(elevator, arm, drivebase, panel);
+    scoreFast = new ScoreCoralFast(elevator, arm, drivebase, panel);
     tuck = new Tuck(elevator, arm, panel);
     pick = new PickFromTrough(elevator, arm, panel);
     moveUp = new GoBackUp(elevator, arm, panel);
@@ -194,8 +192,8 @@ public class RobotContainer
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
     Command standardDrive = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(-driverXbox.getLeftY()*DriveChillValue, OperatorConstants.DEADBAND),
-        () -> MathUtil.applyDeadband(-driveRateLimit.calculate(driverXbox.getLeftX())*DriveChillValue, OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(-driverXbox.getLeftY()*elevator.IsElevatorTooHigh(), OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(-driveRateLimit.calculate(driverXbox.getLeftX())*elevator.IsElevatorTooHigh(), OperatorConstants.DEADBAND),
         () -> MathUtil.applyDeadband(-Constants.DrivebaseConstants.SlowDownTurn*driverXbox.getRightX(), OperatorConstants.DEADBAND));
 
     Command driveFieldOrientedDirectAngle      = drivebase.driveFieldOriented(driveDirectAngle);
@@ -221,12 +219,12 @@ public class RobotContainer
       //driverXbox.a().onTrue(centerTrack);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
-      driverXbox.rightBumper().onTrue(Commands.none());
 
       new JoystickButton(panel, Constants.OperatorConstants.CoralStationButton).onTrue(transfer);
       new JoystickButton(panel, Constants.OperatorConstants.GetCoralButton).onTrue(autoTransfer);
       new JoystickButton(panel, Constants.OperatorConstants.TuckArmButton).onTrue(tuck);
       new JoystickButton(panel, Constants.OperatorConstants.ScoreCoralButton).onTrue(scoreCoral);
+      new JoystickButton(panel, Constants.OperatorConstants.ScoreAndBackUpFastButton).onTrue(scoreFast);
       
       new JoystickButton(panel, Constants.OperatorConstants.L1Button).onTrue(moveToL1);
       new JoystickButton(panel, Constants.OperatorConstants.L2Button).onTrue(moveToL2);
