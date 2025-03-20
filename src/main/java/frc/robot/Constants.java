@@ -40,23 +40,24 @@ public final class Constants
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
     public static final double UnwindHangSpeed = 1;
-    public static final double ReefForwardSpeed = 1;//was 0.75
-    public static final double ReefKp = -0.045; //was -0.04
+    public static final double ReefForwardSpeed = 1.;//was 0.75
+    public static final double ReefKp = 0.045; //was -0.04
     public static final double ReefSpinKp = 0; //was 0.02;
-    public static final double OffsetCenterCamforLeft = -12;
-    public static final double OffsetCenterCamforRight = 12.5;
+    public static final double OffsetCenterCamforLeft = 11; //subtract 1.5 from value when stopped
+    public static final double OffsetCenterCamforRight = -15.; 
     public static final double OffsetForLeft = 5.7;
     public static final double OffsetForRight = 25;
     public static final double OffsetForCenter = 18.25;
     public static final double tagHeight = -18.75;
-    public static final double CenterCamtagHeight = -14.5;
+    public static final double CenterCamtagHeight = -15;
     public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
-    public static final double CoralStationDriveBackSpeed = 2; //this might be very fast
+    public static final double CoralStationDriveBackSpeed = -2; //this might be very fast
     public static final double CoralStationSideKp = .08;
-    public static final double CoralStationSpinKp = 0;
-    public static final double CoralStationOffset = 5;
+    public static final double CoralStationSpinKp = 0.06;
+    public static final double CoralStationOffset = 12.25;
+    public static final double CoralStationHeight = 7;
     public static final boolean turningMode = true;
     public static final double SlowDownTurn = .8; //slow down turning speed
     public static final int LEDPWMPort = 1; //where are LEDs plugged in
@@ -156,7 +157,7 @@ public final class Constants
     public static final double ArmDownSpeed = -0.6;
     public static final double ArmUpSpeed = 0.6;
     public static final double ArmUpFast = 0.65;
-    public static final double armFlat = 35;
+    public static final double armFlat = 33;
 
     public static final double GripperInSpeed = 1;
     public static final double GripperOutSpeed = -1;

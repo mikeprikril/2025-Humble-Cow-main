@@ -77,7 +77,7 @@ public class TrackTagLeft extends Command {
 
     //define forward speed
     if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.tagHeight && tagNumber != -1){
-    tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
+    tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed*.75; //slow it down a bit
     }
     else tagSpeeds.vxMetersPerSecond = 0;
 

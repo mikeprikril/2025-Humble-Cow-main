@@ -24,6 +24,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.MoveToL2;
 import frc.robot.commands.MoveToL3;
 import frc.robot.commands.MoveToL4;
+import frc.robot.commands.ArmFlatToHang;
 import frc.robot.commands.CenterTrack;
 import frc.robot.commands.ChangePipeline;
 import frc.robot.commands.GoBackUp;
@@ -46,9 +47,11 @@ import frc.robot.commands.AutoMode.AutoScoreCoral;
 import frc.robot.commands.AutoMode.AutoToL4;
 import frc.robot.commands.AutoMode.AutoTransferPosition;
 import frc.robot.commands.AutoMode.LeftTagTrackAuto;
+import frc.robot.commands.AutoMode.OpenChute;
 import frc.robot.commands.AutoMode.RightTagTrackAuto;
 import frc.robot.commands.AutoMode.TuckAuto;
 import frc.robot.commands.ChangeTurningCommand;
+import frc.robot.commands.CloseChute;
 import frc.robot.commands.DriveSideways;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -94,8 +97,10 @@ public class RobotContainer
   private final ScoreCoral scoreCoral;
   private final ScoreCoralFast scoreFast;
   private final Tuck tuck;
+  private final ArmFlatToHang flatArm;
 
   private final HangCommand hangCommand;
+  private final CloseChute closeChute;
 
   private final DriveSideways driveSideways;
 
@@ -154,6 +159,8 @@ public class RobotContainer
     NamedCommands.registerCommand("Track Left Pipe", new LeftTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Track Right Pipe", new RightTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Tuck Arm", new TuckAuto(elevator, arm));
+    NamedCommands.registerCommand("Open Chute", new OpenChute(hanger));
+
     //Commands
     manualElevator = new ManualElevatorCommand(elevator, operatorXbox);
     manualArm = new ManualArmCommand(arm, operatorXbox);
@@ -169,6 +176,7 @@ public class RobotContainer
     driveSideways = new DriveSideways(drivebase, driverXbox);
 
     hangCommand = new HangCommand(hanger, operatorXbox);
+    closeChute = new CloseChute(hanger, operatorXbox);
 
     transfer = new TransferPosition(elevator, arm, panel);
     moveToL1 = new MoveToL1(elevator, arm, panel);
@@ -178,6 +186,7 @@ public class RobotContainer
     scoreCoral = new ScoreCoral(elevator, arm, drivebase, panel);
     scoreFast = new ScoreCoralFast(elevator, arm, drivebase, panel);
     tuck = new Tuck(elevator, arm, panel);
+    flatArm = new ArmFlatToHang(elevator, arm, operatorXbox);
     pick = new PickFromTrough(elevator, arm, panel);
     moveUp = new GoBackUp(elevator, arm, panel);
     autoTransfer = new SequentialCommandGroup(pick, moveUp); //sequential command group for auto transfer
@@ -216,9 +225,11 @@ public class RobotContainer
       driverXbox.back().onTrue(Commands.none());
       driverXbox.x().onTrue(trackReefLeft);
       driverXbox.b().onTrue(trackReefRight);
-      //driverXbox.a().onTrue(centerTrack);
+      driverXbox.a().onTrue(trackCoralStation);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
+
+      operatorXbox.y().onTrue(flatArm);
 
       new JoystickButton(panel, Constants.OperatorConstants.CoralStationButton).onTrue(transfer);
       new JoystickButton(panel, Constants.OperatorConstants.GetCoralButton).onTrue(autoTransfer);

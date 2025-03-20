@@ -9,6 +9,12 @@
           "data": {
             "pathName": "Right Start Hide"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Open Chute"
+          }
         }
       ]
     }

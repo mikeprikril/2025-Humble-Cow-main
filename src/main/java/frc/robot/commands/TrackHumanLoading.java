@@ -49,22 +49,31 @@ public class TrackHumanLoading extends Command {
     tagNumber = swerveDrive.GetHumanTagID();
 
     if (tagNumber == 12 || tagNumber == 2){
-      angleTarget = 55;
+      angleTarget = 52.6;
     }
     if (tagNumber == 13 || tagNumber == 1){
-      angleTarget = -55;
+      angleTarget = -52.6;
     }
 
     //define forward speed
     //loadingSpeeds.vxMetersPerSecond = -driverJoystick.getLeftY()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
-    loadingSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.CoralStationDriveBackSpeed;
+    if (tagNumber != -1 && swerveDrive.TrackHumanTagY() < 6){
+  loadingSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.CoralStationDriveBackSpeed;
+    }
+    else loadingSpeeds.vxMetersPerSecond = 0;
 
     //define side-to-side speed
     //loadingSpeeds.vyMetersPerSecond = -driverJoystick.getLeftX()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
-    loadingSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.CoralStationSideKp*(swerveDrive.TrackHumanTagX() + Constants.DrivebaseConstants.CoralStationOffset);
+    if (tagNumber != -1){
+      //loadingSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.CoralStationSideKp*(swerveDrive.TrackHumanTagX() + Constants.DrivebaseConstants.CoralStationOffset);
+    }
+    else loadingSpeeds.vyMetersPerSecond = 0;
 
     //define rotational speed
-    loadingSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees())*Constants.DrivebaseConstants.CoralStationSpinKp;
+    if (tagNumber != -1){
+      loadingSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees())*Constants.DrivebaseConstants.CoralStationSpinKp;
+    }
+    else loadingSpeeds.omegaRadiansPerSecond = 0;
 
     //send values to swervedrive
     swerveDrive.drive(loadingSpeeds); 

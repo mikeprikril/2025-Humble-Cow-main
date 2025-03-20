@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.HangSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class HangCommand extends Command {
-  /** Creates a new HangCommand. */
+public class CloseChute extends Command {
+  /** Creates a new Closechute. */
+    
   public final HangSubsystem hang;
   public final CommandXboxController operatorController;
 
-
-  public HangCommand(HangSubsystem m_hang, CommandXboxController m_operatorController) {
+  public CloseChute(HangSubsystem m_hang, CommandXboxController m_operatorController) {
     // Use addRequirements() here to declare subsystem dependencies.
     hang = m_hang;
     operatorController = m_operatorController;
@@ -30,24 +30,16 @@ public class HangCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (operatorController.getHID().getRawButton(8) == true){
-      hang.HangRobot();
-    }
-    else if (operatorController.getHID().getRawButton(7) == true){
-      hang.UnwindHanger();
-    }
-    else hang.StopHangMotor();
-
-  if (operatorController.getHID().getRawButton(2) == true){
+    if (operatorController.getHID().getRawButton(2) == true){
       hang.RotateHangBar(.5);
     }
     else hang.RotateHangBar(10);
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

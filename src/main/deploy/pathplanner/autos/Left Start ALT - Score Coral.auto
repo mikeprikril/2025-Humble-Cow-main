@@ -19,6 +19,12 @@
                 "data": {
                   "name": "Move to L4"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute"
+                }
               }
             ]
           }

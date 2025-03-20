@@ -76,41 +76,37 @@ public class TrackReefRight extends Command {
 
     //define forward speed
     if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.CenterCamtagHeight && tagNumber != -1){
-    tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
-    }
-    else tagSpeeds.vxMetersPerSecond = 0;
-
-    //define side-to-side speed
-    if (tagNumber != -1){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetCenterCamforRight); //multiply Limelight value by P factor
-      //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + XTarget);
-      if (swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetCenterCamforLeft < 0.2){
-        RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 1);
+      tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
       }
-      else{
-        RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 0);
+  
+      else tagSpeeds.vxMetersPerSecond = 0;
+  
+      //define side-to-side speed
+      if (tagNumber != -1){
+          tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(Constants.DrivebaseConstants.OffsetCenterCamforRight - swerveDrive.TrackReefTagX());
       }
-    }
-
-    /*else if (tagNumber != -1 && swerveDrive.TrackReefTagY() > 0){
-      tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.TagSlow*Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
-    }*/
-    else tagSpeeds.vyMetersPerSecond = 0;
-
-    //define rotational speed
-    if (tagNumber != -1 && tagNumber != 0){
-      if (swerveDrive.getHeading().getDegrees() > 0){
-        tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+      else tagSpeeds.vyMetersPerSecond = 0;
+  
+        if (Constants.DrivebaseConstants.OffsetCenterCamforRight - swerveDrive.TrackHumanTagX() < 0.5){
+          RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 1);
         }
-        if (swerveDrive.getHeading().getDegrees() < 0){
-        tagSpeeds.omegaRadiansPerSecond = (angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
+        else RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 0);
+      
+  
+      //define rotational speed
+      if (tagNumber != -1 && tagNumber != 0){
+        if (swerveDrive.getHeading().getDegrees() > 0){
+          tagSpeeds.omegaRadiansPerSecond = (angleTarget - swerveDrive.getHeading().getDegrees()) * Constants.DrivebaseConstants.ReefSpinKp;
+          }
+          if (swerveDrive.getHeading().getDegrees() < 0){
+          tagSpeeds.omegaRadiansPerSecond = (angleTarget - (360 + swerveDrive.getHeading().getDegrees())) * Constants.DrivebaseConstants.ReefSpinKp;
+          }
         }
-      }
-    else tagSpeeds.omegaRadiansPerSecond = 0;
-
-    //send values to swervedrive
-    swerveDrive.drive(tagSpeeds);
-  }
+      else tagSpeeds.omegaRadiansPerSecond = 0;
+  
+      //send values to swervedrive
+      swerveDrive.drive(tagSpeeds);
+    }
 
   // Called once the command ends or is interrupted.
   @Override

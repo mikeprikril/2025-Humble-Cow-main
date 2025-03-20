@@ -32,8 +32,11 @@ public class ChangeTurningCommand extends Command {
   Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.DEADBAND),
         () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.DEADBAND),
-        () -> -driverXbox.getRightX(),
-        () -> -driverXbox.getRightY());
+        () -> MathUtil.applyDeadband(Constants.DrivebaseConstants.SlowDownTurn*-driverXbox.getRightX(), OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(Constants.DrivebaseConstants.SlowDownTurn*-driverXbox.getRightY(), OperatorConstants.DEADBAND));
+
+        //() -> -driverXbox.getRightX(),
+        //() -> -driverXbox.getRightY());
 
     Command standardDrive = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.DEADBAND),
@@ -48,7 +51,7 @@ public class ChangeTurningCommand extends Command {
   @Override
   public void execute() {
     //code HERREEE REMEMBERRRRR
-    if (mode=true) {
+    if (mode==true) {
       mode = false;
       drivebase.setDefaultCommand(driveFieldOrientedDirectAngle);
       }

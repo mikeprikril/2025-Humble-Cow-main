@@ -42,13 +42,14 @@ public class LeftTagTrackAuto extends Command {
   public void execute() {
 
     //define forward speed
-    if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.tagHeight) {
+    if (swerveDrive.TrackReefTagY() > Constants.DrivebaseConstants.CenterCamtagHeight) {
     tagSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.ReefForwardSpeed;
     }
     else tagSpeeds.vxMetersPerSecond = 0;
 
     //define side-to-side speed
-    tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
+    //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft);
+    tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(Constants.DrivebaseConstants.OffsetCenterCamforLeft - swerveDrive.TrackReefTagX());
 
     //define rotational speed
     tagSpeeds.omegaRadiansPerSecond = 0;
@@ -67,7 +68,7 @@ public class LeftTagTrackAuto extends Command {
   @Override
   public boolean isFinished() {
     return 
-    (swerveDrive.TrackReefTagY() < Constants.DrivebaseConstants.tagHeight); 
+    (swerveDrive.TrackReefTagY() < Constants.DrivebaseConstants.CenterCamtagHeight); 
     //&&
     //Math.abs(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft) < 2)
    // ||

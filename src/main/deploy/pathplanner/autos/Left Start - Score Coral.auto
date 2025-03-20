@@ -19,6 +19,12 @@
                 "data": {
                   "name": "Move to L4"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute"
+                }
               }
             ]
           }
@@ -128,6 +134,12 @@
           "type": "named",
           "data": {
             "name": "Score Coral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Back Away"
           }
         }
       ]

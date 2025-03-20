@@ -25,6 +25,12 @@
                 "data": {
                   "name": "Track Left Pipe"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute"
+                }
               }
             ]
           }
