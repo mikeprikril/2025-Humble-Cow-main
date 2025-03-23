@@ -34,7 +34,13 @@ public class HangCommand extends Command {
       hang.HangRobot();
     }
     else if (operatorController.getHID().getRawButton(7) == true){
-      hang.UnwindHanger();
+      hang.ExtendHanger();
+    }
+    else if (operatorController.getHID().getXButton()){
+      hang.HangerJustABitOut();
+    }
+    else if (operatorController.getHID().getBButton()){
+      hang.HangerVertical();
     }
     else hang.StopHangMotor();
 
@@ -42,6 +48,10 @@ public class HangCommand extends Command {
       hang.RotateHangBar(.5);
     }
     else hang.RotateHangBar(10);
+
+  if (operatorController.getHID().getAButton() == true){
+    hang.ResetHangEncoder();
+  }
 
   }
 

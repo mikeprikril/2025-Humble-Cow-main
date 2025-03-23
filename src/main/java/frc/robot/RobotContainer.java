@@ -46,6 +46,7 @@ import frc.robot.commands.AutoMode.AutoPick;
 import frc.robot.commands.AutoMode.AutoScoreCoral;
 import frc.robot.commands.AutoMode.AutoToL4;
 import frc.robot.commands.AutoMode.AutoTransferPosition;
+import frc.robot.commands.AutoMode.HangerSafeOut;
 import frc.robot.commands.AutoMode.LeftTagTrackAuto;
 import frc.robot.commands.AutoMode.OpenChute;
 import frc.robot.commands.AutoMode.RightTagTrackAuto;
@@ -160,6 +161,7 @@ public class RobotContainer
     NamedCommands.registerCommand("Track Right Pipe", new RightTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Tuck Arm", new TuckAuto(elevator, arm));
     NamedCommands.registerCommand("Open Chute", new OpenChute(hanger));
+    NamedCommands.registerCommand("Move Hang Arm A Bit", new HangerSafeOut(hanger));
 
     //Commands
     manualElevator = new ManualElevatorCommand(elevator, operatorXbox);

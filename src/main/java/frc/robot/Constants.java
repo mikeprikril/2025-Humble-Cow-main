@@ -40,11 +40,11 @@ public final class Constants
     public static final int HangMotorID = 14;
     public static final double HangSpeed = -1;
     public static final double UnwindHangSpeed = 1;
-    public static final double ReefForwardSpeed = 1.;//was 0.75
+    public static final double ReefForwardSpeed = .85;//was 0.75
     public static final double ReefKp = 0.045; //was -0.04
     public static final double ReefSpinKp = 0; //was 0.02;
-    public static final double OffsetCenterCamforLeft = 11; //subtract 1.5 from value when stopped
-    public static final double OffsetCenterCamforRight = -15.; 
+    public static final double OffsetCenterCamforLeft = 14.3; //subtract 1.5 from value when stopped (was 17.6 on field cal)
+    public static final double OffsetCenterCamforRight = -11.3; 
     public static final double OffsetForLeft = 5.7;
     public static final double OffsetForRight = 25;
     public static final double OffsetForCenter = 18.25;
@@ -53,11 +53,11 @@ public final class Constants
     public static final double TagSlow = 0.8;
 
     public static final double HumanLoadingKp = 3; //max speed in m/s when driving to human station
-    public static final double CoralStationDriveBackSpeed = -2; //this might be very fast
+    public static final double CoralStationDriveBackSpeed = -1.5; //this might be very fast
     public static final double CoralStationSideKp = .08;
     public static final double CoralStationSpinKp = 0.06;
-    public static final double CoralStationOffset = 12.25;
-    public static final double CoralStationHeight = 7;
+    public static final double CoralStationOffset = 5.25;
+    public static final double CoralStationHeight = 4.5;
     public static final boolean turningMode = true;
     public static final double SlowDownTurn = .8; //slow down turning speed
     public static final int LEDPWMPort = 1; //where are LEDs plugged in
@@ -110,7 +110,7 @@ public final class Constants
     public static final double SlowDown = 0.2; //slow down to 20% if close to limit
 
     public static final double deadband = 1;
-    public static final double TransferHeight = 44;
+    public static final double TransferHeight = 43;
     public static final double SafeHeight = 35; //when can arm start moving down in auto feed
     public static final double troughHeight = 38;
     public static final double L1Height = 45;
@@ -123,7 +123,7 @@ public final class Constants
     public static final double FasterUpSpeed = -.6;
     public static final double AutoDownSpeed = 0.45;
     public static final double BumpDownSpeed = 0.1;
-    public static final double HoldElevatorSpeed = 0;
+    public static final double HoldElevatorSpeed = -.02;
 
     public static final int TransferButton = 1;
     public static final int BumpDownTestButton = 2;
@@ -172,6 +172,11 @@ public final class Constants
     public static final double WaitScore = 0.7; //time gripper spits out before backing up
     public static final double DriveBackTime = 1.2; //time robot drives back after scoring
     public static final double DriveBackSpeed = -0.7; //speed that robot bumps back after scoring
+  }
+  public static class HangConstants{
+    public static final double HangerHorizontal = 65;
+    public static final double HangerJustABitOut = 17;
+    public static final double RobotHanging = -10;
   }
 
 }

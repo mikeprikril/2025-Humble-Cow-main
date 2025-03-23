@@ -85,7 +85,7 @@ public class TrackTagLeft extends Command {
     if (tagNumber != -1){
       tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft); //multiply Limelight value by P factor
       //tagSpeeds.vyMetersPerSecond = Constants.DrivebaseConstants.ReefKp*(swerveDrive.TrackReefTagX() + XTarget);
-      if (tagSpeeds.vyMetersPerSecond==0){
+      if (tagSpeeds.vyMetersPerSecond<0.1 & tagSpeeds.vyMetersPerSecond>-0.1){
         RobotContainer.driverXbox.setRumble(RumbleType.kBothRumble, 1);
       }
       else{

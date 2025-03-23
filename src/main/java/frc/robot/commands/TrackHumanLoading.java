@@ -57,7 +57,7 @@ public class TrackHumanLoading extends Command {
 
     //define forward speed
     //loadingSpeeds.vxMetersPerSecond = -driverJoystick.getLeftY()*Constants.DrivebaseConstants.HumanLoadingKp; //pass values from joystick
-    if (tagNumber != -1 && swerveDrive.TrackHumanTagY() < 6){
+    if (tagNumber != -1 && swerveDrive.TrackHumanTagY() < Constants.DrivebaseConstants.CoralStationHeight){
   loadingSpeeds.vxMetersPerSecond = Constants.DrivebaseConstants.CoralStationDriveBackSpeed;
     }
     else loadingSpeeds.vxMetersPerSecond = 0;

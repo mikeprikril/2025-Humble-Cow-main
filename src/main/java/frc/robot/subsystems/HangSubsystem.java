@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -22,6 +23,8 @@ public class HangSubsystem extends SubsystemBase {
   VictorSP AndrewMotor;
   Servo rotatorServo;
 
+  RelativeEncoder hangEncoder;
+
   SparkMaxConfig hangMotorConfig = new SparkMaxConfig();
 
   public HangSubsystem() {
@@ -31,6 +34,8 @@ public class HangSubsystem extends SubsystemBase {
     hangMotor = new SparkMax(Constants.DrivebaseConstants.HangMotorID, MotorType.kBrushless);
     hangMotor.configure(hangMotorConfig, null, null);
 
+    hangEncoder = hangMotor.getEncoder();
+
     AndrewMotor = new VictorSP(4);
 
     rotatorServo = new Servo(2);
@@ -38,14 +43,53 @@ public class HangSubsystem extends SubsystemBase {
   }
 
   public void HangRobot(){
+  if (hangEncoder.getPosition() > Constants.HangConstants.RobotHanging){
   hangMotor.set(Constants.DrivebaseConstants.HangSpeed);
   AndrewMotor.set(1);
+  }
+  else {
+    hangMotor.stopMotor();
+    AndrewMotor.stopMotor();
+  }
 }
 
-  public void UnwindHanger(){
-  hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed);
-  AndrewMotor.stopMotor();
+public void HangerVertical(){
+  if (hangEncoder.getPosition() > 0){
+  hangMotor.set(Constants.DrivebaseConstants.HangSpeed*.4);
+  AndrewMotor.set(1);
+  }
+  else {
+    hangMotor.stopMotor();
+    AndrewMotor.stopMotor();
+  }
 }
+
+  public void ExtendHanger(){
+    if (hangEncoder.getPosition() < Constants.HangConstants.HangerHorizontal){
+  hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.4);
+  AndrewMotor.stopMotor();
+    }
+  else {
+    hangMotor.stopMotor();
+    AndrewMotor.stopMotor();
+  }
+}
+
+public void HangerJustABitOut(){
+  if (hangEncoder.getPosition() < Constants.HangConstants.HangerJustABitOut){
+hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.4);
+AndrewMotor.stopMotor();
+  }
+else {
+  hangMotor.stopMotor();
+  AndrewMotor.stopMotor();
+  }
+}
+
+public double GetHangEncoderPosition(){
+  return hangEncoder.getPosition();
+}
+
 
 public void StopHangMotor(){
   hangMotor.stopMotor();
@@ -56,10 +100,17 @@ public void RotateHangBar(double ServoPosition){
 rotatorServo.setPosition(ServoPosition);
 }
 
+public void ResetHangEncoder(){
+
+    hangMotor.getEncoder().setPosition(0); //reset encoder 
+  }
+
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Servo Position", rotatorServo.getPulseTimeMicroseconds());
+    SmartDashboard.putNumber("Hang Encoder Value", hangEncoder.getPosition());
   }
 }

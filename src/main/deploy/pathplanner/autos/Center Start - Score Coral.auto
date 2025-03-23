@@ -5,9 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Center Start"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Center Start"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move Hang Arm A Bit"
+                }
+              }
+            ]
           }
         },
         {

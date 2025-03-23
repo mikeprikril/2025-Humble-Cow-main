@@ -68,10 +68,10 @@ public class LeftTagTrackAuto extends Command {
   @Override
   public boolean isFinished() {
     return 
-    (swerveDrive.TrackReefTagY() < Constants.DrivebaseConstants.CenterCamtagHeight); 
+    //(swerveDrive.TrackReefTagY() < Constants.DrivebaseConstants.CenterCamtagHeight); 
     //&&
     //Math.abs(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft) < 2)
    // ||
-    //timer.get() > 3.75;
+    timer.get() > 2.25;
   }
 }

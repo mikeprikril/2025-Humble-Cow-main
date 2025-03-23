@@ -25,6 +25,12 @@
                 "data": {
                   "name": "Open Chute"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move Hang Arm A Bit"
+                }
               }
             ]
           }
@@ -65,9 +71,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "Move to Human Loading"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Move to Human Loading"
+                      }
+                    }
+                  ]
                 }
               }
             ]
