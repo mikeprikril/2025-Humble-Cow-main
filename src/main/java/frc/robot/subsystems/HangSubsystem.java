@@ -55,7 +55,7 @@ public class HangSubsystem extends SubsystemBase {
 
 public void HangerVertical(){
   if (hangEncoder.getPosition() > 0){
-  hangMotor.set(Constants.DrivebaseConstants.HangSpeed*.4);
+  hangMotor.set(Constants.DrivebaseConstants.HangSpeed*.6);
   AndrewMotor.set(1);
   }
   else {
@@ -66,7 +66,7 @@ public void HangerVertical(){
 
   public void ExtendHanger(){
     if (hangEncoder.getPosition() < Constants.HangConstants.HangerHorizontal){
-  hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.4);
+  hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.6);
   AndrewMotor.stopMotor();
     }
   else {
@@ -77,7 +77,7 @@ public void HangerVertical(){
 
 public void HangerJustABitOut(){
   if (hangEncoder.getPosition() < Constants.HangConstants.HangerJustABitOut){
-hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.4);
+hangMotor.set(Constants.DrivebaseConstants.UnwindHangSpeed*.6);
 AndrewMotor.stopMotor();
   }
 else {

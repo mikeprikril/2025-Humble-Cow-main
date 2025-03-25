@@ -80,6 +80,7 @@ public class TrackReefRight extends Command {
       }
   
       else tagSpeeds.vxMetersPerSecond = 0;
+
   
       //define side-to-side speed
       if (tagNumber != -1){

@@ -228,6 +228,7 @@ public class RobotContainer
       driverXbox.x().onTrue(trackReefLeft);
       driverXbox.b().onTrue(trackReefRight);
       driverXbox.a().onTrue(trackCoralStation);
+      driverXbox.y().onTrue(centerTrack);
       driverXbox.leftBumper().onTrue(driveSideways);
       driverXbox.rightBumper().onTrue(driveSideways);
 
@@ -257,6 +258,7 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     //return autoChooser.getSelected();
+    //return new PathPlannerAuto("Left Start - Score 2 Coral");//two Coral from left start
     return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
     //return new PathPlannerAuto("Left Start - Hide");//Just cross the line and do nothing
     

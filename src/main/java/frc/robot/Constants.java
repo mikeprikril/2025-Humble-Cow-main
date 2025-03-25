@@ -43,11 +43,11 @@ public final class Constants
     public static final double ReefForwardSpeed = .85;//was 0.75
     public static final double ReefKp = 0.045; //was -0.04
     public static final double ReefSpinKp = 0; //was 0.02;
-    public static final double OffsetCenterCamforLeft = 14.3; //subtract 1.5 from value when stopped (was 17.6 on field cal)
-    public static final double OffsetCenterCamforRight = -11.3; 
+    public static final double OffsetCenterCamforLeft = 15.1;//subtract 1.5 from value when stopped (was 17.6 on field cal)
+    public static final double OffsetCenterCamforRight = -11.5; 
     public static final double OffsetForLeft = 5.7;
     public static final double OffsetForRight = 25;
-    public static final double OffsetForCenter = 18.25;
+    public static final double OffsetForCenter = 0;
     public static final double tagHeight = -18.75;
     public static final double CenterCamtagHeight = -15;
     public static final double TagSlow = 0.8;
@@ -174,9 +174,9 @@ public final class Constants
     public static final double DriveBackSpeed = -0.7; //speed that robot bumps back after scoring
   }
   public static class HangConstants{
-    public static final double HangerHorizontal = 65;
-    public static final double HangerJustABitOut = 17;
-    public static final double RobotHanging = -10;
+    public static final double HangerHorizontal = 200;
+    public static final double HangerJustABitOut = 60;
+    public static final double RobotHanging = -200;
   }
 
 }

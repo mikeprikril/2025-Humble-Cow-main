@@ -23,12 +23,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Open Chute"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "Move Hang Arm A Bit"
                 }
               }

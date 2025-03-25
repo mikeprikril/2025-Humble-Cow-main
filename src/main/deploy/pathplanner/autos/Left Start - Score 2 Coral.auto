@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Far Right Start"
+                  "pathName": "LS to TRR"
                 }
               },
               {
@@ -61,7 +61,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Right side to Human"
+                  "pathName": "Close Right side to Human"
                 }
               },
               {
@@ -99,7 +99,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human to Right side"
+                  "pathName": "Human to Far Right side"
                 }
               },
               {
@@ -131,7 +131,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Track Left Pipe"
+                  "name": "Track Right Pipe"
                 }
               },
               {
@@ -152,7 +152,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Back Away"
+            "pathName": "New Path"
           }
         }
       ]

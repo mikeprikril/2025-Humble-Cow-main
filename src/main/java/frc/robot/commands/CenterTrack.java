@@ -73,6 +73,6 @@ public class CenterTrack extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !driverJoystick.getHID().getAButton(); //stop once A button released released;
+    return !driverJoystick.getHID().getYButton(); //stop once A button released released;
   }
 }
