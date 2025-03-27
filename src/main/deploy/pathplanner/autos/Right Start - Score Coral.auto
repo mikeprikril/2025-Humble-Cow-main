@@ -25,6 +25,12 @@
                 "data": {
                   "name": "Move Hang Arm A Bit"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute For Automode"
+                }
               }
             ]
           }

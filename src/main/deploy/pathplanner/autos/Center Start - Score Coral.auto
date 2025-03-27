@@ -19,6 +19,12 @@
                 "data": {
                   "name": "Move Hang Arm A Bit"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute For Automode"
+                }
               }
             ]
           }
@@ -37,12 +43,6 @@
                 "type": "named",
                 "data": {
                   "name": "Track Left Pipe"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Open Chute"
                 }
               }
             ]

@@ -21,7 +21,7 @@ public class HangSubsystem extends SubsystemBase {
 
   SparkMax hangMotor;
   VictorSP AndrewMotor;
-  Servo rotatorServo;
+  //Servo rotatorServo;
 
   RelativeEncoder hangEncoder;
 
@@ -38,8 +38,9 @@ public class HangSubsystem extends SubsystemBase {
 
     AndrewMotor = new VictorSP(4);
 
-    rotatorServo = new Servo(2);
+    /*rotatorServo = new Servo(2);
     rotatorServo.setBoundsMicroseconds(2000, 1800, 1500, 1200, 0);
+    */
   }
 
   public void HangRobot(){
@@ -96,9 +97,10 @@ public void StopHangMotor(){
   AndrewMotor.stopMotor();
 }
 
-public void RotateHangBar(double ServoPosition){
+/*public void RotateHangBar(double ServoPosition){
 rotatorServo.setPosition(ServoPosition);
 }
+*/
 
 public void ResetHangEncoder(){
 
@@ -110,7 +112,7 @@ public void ResetHangEncoder(){
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Servo Position", rotatorServo.getPulseTimeMicroseconds());
+    //SmartDashboard.putNumber("Servo Position", rotatorServo.getPulseTimeMicroseconds());
     SmartDashboard.putNumber("Hang Encoder Value", hangEncoder.getPosition());
   }
 }

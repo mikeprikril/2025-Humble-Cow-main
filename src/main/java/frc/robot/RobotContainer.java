@@ -30,6 +30,7 @@ import frc.robot.commands.ChangePipeline;
 import frc.robot.commands.GoBackUp;
 import frc.robot.commands.HangCommand;
 import frc.robot.commands.ManualArmCommand;
+import frc.robot.commands.ManualChuteCommand;
 import frc.robot.commands.ManualElevatorCommand;
 import frc.robot.commands.MoveToL1;
 import frc.robot.commands.PickFromTrough;
@@ -42,19 +43,19 @@ import frc.robot.commands.TrackTagLeft;
 import frc.robot.commands.TrackTagRight;
 import frc.robot.commands.TransferPosition;
 import frc.robot.commands.Tuck;
+import frc.robot.commands.AutoMode.AutoModeOpenChute;
 import frc.robot.commands.AutoMode.AutoPick;
 import frc.robot.commands.AutoMode.AutoScoreCoral;
 import frc.robot.commands.AutoMode.AutoToL4;
 import frc.robot.commands.AutoMode.AutoTransferPosition;
 import frc.robot.commands.AutoMode.HangerSafeOut;
 import frc.robot.commands.AutoMode.LeftTagTrackAuto;
-import frc.robot.commands.AutoMode.OpenChute;
 import frc.robot.commands.AutoMode.RightTagTrackAuto;
 import frc.robot.commands.AutoMode.TuckAuto;
 import frc.robot.commands.ChangeTurningCommand;
-import frc.robot.commands.CloseChute;
 import frc.robot.commands.DriveSideways;
 import frc.robot.subsystems.ArmSubsytem;
+import frc.robot.subsystems.ChuteSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HangSubsystem;
 //import frc.robot.subsystems.Limelight;
@@ -85,6 +86,7 @@ public class RobotContainer
   private final ElevatorSubsystem elevator = new ElevatorSubsystem();
   private final ArmSubsytem arm = new ArmSubsytem();
   private final HangSubsystem hanger = new HangSubsystem();
+  private final ChuteSubsystem chute = new ChuteSubsystem();
   //private final Limelight limelight = new Limelight();
 
   //Commands
@@ -101,7 +103,6 @@ public class RobotContainer
   private final ArmFlatToHang flatArm;
 
   private final HangCommand hangCommand;
-  private final CloseChute closeChute;
 
   private final DriveSideways driveSideways;
 
@@ -114,6 +115,7 @@ public class RobotContainer
   private final CenterTrack centerTrack;
   private final PickFromTrough pick;
   private final GoBackUp moveUp;
+  private final ManualChuteCommand moveChute;
   private final ChangeTurningCommand changeTurning;
 
   private final SequentialCommandGroup autoTransfer;
@@ -160,8 +162,8 @@ public class RobotContainer
     NamedCommands.registerCommand("Track Left Pipe", new LeftTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Track Right Pipe", new RightTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Tuck Arm", new TuckAuto(elevator, arm));
-    NamedCommands.registerCommand("Open Chute", new OpenChute(hanger));
     NamedCommands.registerCommand("Move Hang Arm A Bit", new HangerSafeOut(hanger));
+    NamedCommands.registerCommand("Open Chute For Automode", new AutoModeOpenChute(chute));
 
     //Commands
     manualElevator = new ManualElevatorCommand(elevator, operatorXbox);
@@ -178,7 +180,6 @@ public class RobotContainer
     driveSideways = new DriveSideways(drivebase, driverXbox);
 
     hangCommand = new HangCommand(hanger, operatorXbox);
-    closeChute = new CloseChute(hanger, operatorXbox);
 
     transfer = new TransferPosition(elevator, arm, panel);
     moveToL1 = new MoveToL1(elevator, arm, panel);
@@ -191,6 +192,8 @@ public class RobotContainer
     flatArm = new ArmFlatToHang(elevator, arm, operatorXbox);
     pick = new PickFromTrough(elevator, arm, panel);
     moveUp = new GoBackUp(elevator, arm, panel);
+    
+    moveChute = new ManualChuteCommand(chute, operatorXbox);
     autoTransfer = new SequentialCommandGroup(pick, moveUp); //sequential command group for auto transfer
 
     //Automode Chooser
@@ -216,6 +219,7 @@ public class RobotContainer
     elevator.setDefaultCommand(manualElevator);
     arm.setDefaultCommand(manualArm);
     hanger.setDefaultCommand(hangCommand);
+    chute.setDefaultCommand(moveChute);
     //limelight.setDefaultCommand(changePipeline);
   }
 

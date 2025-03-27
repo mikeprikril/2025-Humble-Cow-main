@@ -44,14 +44,16 @@ public class HangCommand extends Command {
     }
     else hang.StopHangMotor();
 
-  if (operatorController.getHID().getRawButton(2) == true){
+  /*if (operatorController.getHID().getRawButton(2) == true){
       hang.RotateHangBar(.5);
     }
     else hang.RotateHangBar(10);
+    */
 
   if (operatorController.getHID().getAButton() == true){
     hang.ResetHangEncoder();
   }
+
 
   }
 

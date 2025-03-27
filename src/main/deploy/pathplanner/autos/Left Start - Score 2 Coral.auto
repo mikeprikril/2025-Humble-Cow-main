@@ -25,6 +25,12 @@
                 "data": {
                   "name": "Move Hang Arm A Bit"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Open Chute For Automode"
+                }
               }
             ]
           }
@@ -147,12 +153,6 @@
           "type": "named",
           "data": {
             "name": "Score Coral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "New Path"
           }
         }
       ]

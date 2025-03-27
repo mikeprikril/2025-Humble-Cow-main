@@ -20,9 +20,9 @@ public final class Constants
 {
 
   public static final double ROBOT_MASS = (135) * 0.453592; // 135lbs * kg per pound
-  public static final Matter CHASSIS    = new Matter(new Translation3d(-3, 0, Units.inchesToMeters(10)), ROBOT_MASS);
+  public static final Matter CHASSIS    = new Matter(new Translation3d(-5, 0, Units.inchesToMeters(10)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED  = Units.feetToMeters(15.5);
+  public static final double MAX_SPEED  = Units.feetToMeters(17.5);
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
 //  public static final class AutonConstants
