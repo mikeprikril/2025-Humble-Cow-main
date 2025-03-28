@@ -169,8 +169,8 @@ public final class Constants
 
     public static final double RateLimit = 1; //arm will get to full speed in 1 / this time in seconds
 
-    public static final double WaitScore = 0.7; //time gripper spits out before backing up
-    public static final double DriveBackTime = .7; //time robot drives back after scoring
+    public static final double WaitScore = 0.5; //time gripper spits out before backing up
+    public static final double DriveBackTime = 0.7; //time robot drives back after scoring
     public static final double DriveBackSpeed = -0.7; //speed that robot bumps back after scoring
   }
   public static class HangConstants{

@@ -46,6 +46,7 @@ import frc.robot.commands.Tuck;
 import frc.robot.commands.AutoMode.AutoModeOpenChute;
 import frc.robot.commands.AutoMode.AutoPick;
 import frc.robot.commands.AutoMode.AutoScoreCoral;
+import frc.robot.commands.AutoMode.AutoScoreCoral2;
 import frc.robot.commands.AutoMode.AutoToL4;
 import frc.robot.commands.AutoMode.AutoTransferPosition;
 import frc.robot.commands.AutoMode.HangerSafeOut;
@@ -159,6 +160,7 @@ public class RobotContainer
     NamedCommands.registerCommand("Move to Human Loading", new AutoTransferPosition(elevator, arm));
     NamedCommands.registerCommand("Grab Coral", new AutoPick(elevator, arm));
     NamedCommands.registerCommand("Score Coral", new AutoScoreCoral(elevator, arm, drivebase));
+    NamedCommands.registerCommand("Score Second Coral", new AutoScoreCoral2(elevator, arm, drivebase));
     NamedCommands.registerCommand("Track Left Pipe", new LeftTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Track Right Pipe", new RightTagTrackAuto(drivebase));
     NamedCommands.registerCommand("Tuck Arm", new TuckAuto(elevator, arm));
