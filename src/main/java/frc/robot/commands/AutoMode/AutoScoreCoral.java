@@ -51,7 +51,7 @@ public class AutoScoreCoral extends Command {
 
     //arm down slow
     if (arm.GetArmEncoderPosition() < Constants.ArmConstants.ScorePosition){
-      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.5); 
+      arm.AutoArmMove(Constants.ArmConstants.ArmDownSpeed*.7); 
     }
     else {
       arm.StopArm();
@@ -83,6 +83,7 @@ public class AutoScoreCoral extends Command {
   @Override
   public void end(boolean interrupted) {
     timer.stop();
+    timer.reset();
     arm.StopGripper();
 
   }

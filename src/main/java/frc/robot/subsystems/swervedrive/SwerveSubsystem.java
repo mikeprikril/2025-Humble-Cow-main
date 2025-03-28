@@ -5,6 +5,7 @@
 package frc.robot.subsystems.swervedrive;
 
 import static edu.wpi.first.units.Units.Meter;
+import static edu.wpi.first.units.Units.MetersPerSecond;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -32,11 +33,16 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -66,6 +72,10 @@ public class SwerveSubsystem extends SubsystemBase
 {
   //create rate limiter to stop tipping
   SlewRateLimiter driveRateLimiter;
+
+  //create LED stuff
+  AddressableLED adLED;
+  AddressableLEDBuffer adLEDBuffer;
 
   /**
    * Swerve drive object.
@@ -137,6 +147,12 @@ public class SwerveSubsystem extends SubsystemBase
     setupPathPlanner();
 
     driveRateLimiter = new SlewRateLimiter(Constants.DrivebaseConstants.DriveRateLimit);
+    
+    adLED = new AddressableLED(Constants.DrivebaseConstants.LEDPWMPort);
+    adLEDBuffer = new AddressableLEDBuffer(64);
+    adLED.setLength(adLEDBuffer.getLength());
+    adLED.start();
+
   }
 
   /**
@@ -193,9 +209,27 @@ public class SwerveSubsystem extends SubsystemBase
     return tid.getDouble(0);
   }
 
+  public void LEDSolidGreen(){
+  /*  for (int i = 0; i < adLEDBuffer.getLength(); i++)
+    {
+      adLEDBuffer.setRGB(i, 0, 192, 0);
+    }
+  */
+ 
+  
+  }
+
+  public void turnLEDOff(){
+    for (int i = 0; i < adLEDBuffer.getLength(); i++)
+    {
+      adLEDBuffer.setRGB(i, 0, 0, 0);
+    }
+  }
+
   @Override
   public void periodic()
   {
+
 double aprilx = tx.getDouble(0.0);
 double aprily = ty.getDouble(0.0);
 double aprilarea = ta.getDouble(0.0);
@@ -216,6 +250,40 @@ double aprilID = tid.getDouble(0.0);
     SmartDashboard.putNumber("Rear LimeLight Y Value", behindty.getDouble(0));
     SmartDashboard.putNumber("Rear LimeLight Target Area", behindta.getDouble(0));
     SmartDashboard.putNumber("Coral Station AprilTag ID", behindtid.getDouble(0));
+
+  //send LED stuff
+  LEDPattern Off = LEDPattern.solid(Color.kBlack);
+  LEDPattern red = LEDPattern.solid(Color.kRed);
+  LEDPattern green = LEDPattern.solid(Color.kGreen);
+  LEDPattern rainbow = LEDPattern.rainbow(255, 255); //all hues at full saturation and full brightness
+  Distance LEDSpacing = Meter.of(1/120);
+  LEDPattern scrollingRainbow = rainbow.scrollAtAbsoluteSpeed(MetersPerSecond.of(1), LEDSpacing);
+
+  if (aprilID == -1){
+    Off.applyTo(adLEDBuffer);
+  }
+  else if (aprilID != -1 && aprilarea < 5){
+    red.applyTo(adLEDBuffer);
+  }
+  else if (aprilID != -1 && aprilarea > 5 
+  && 
+  ((Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforLeft - aprilx) > .5))
+  ||
+  (Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforRight - aprilx) > .5))
+  {
+    green.applyTo(adLEDBuffer);
+  }
+  else if (aprilID != -1 && aprilarea > 5 
+  && 
+  ((Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforLeft - aprilx) < .5))
+  ||
+  (Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforRight - aprilx) < .5))
+  {
+    scrollingRainbow.applyTo(adLEDBuffer);
+  }
+
+
+  adLED.setData(adLEDBuffer);
 
     // When vision is enabled we must manually update odometry in SwerveDrive
     if (visionDriveTest)

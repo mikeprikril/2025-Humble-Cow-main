@@ -60,7 +60,7 @@ public final class Constants
     public static final double CoralStationHeight = 4.5;
     public static final boolean turningMode = true;
     public static final double SlowDownTurn = .8; //slow down turning speed
-    public static final int LEDPWMPort = 1; //where are LEDs plugged in
+    public static final int LEDPWMPort = 3; //where are LEDs plugged in
 
     public static final double CreepSpeed = 0.3;
     public static final double DriveRateLimit = 2.5;
@@ -170,7 +170,7 @@ public final class Constants
     public static final double RateLimit = 1; //arm will get to full speed in 1 / this time in seconds
 
     public static final double WaitScore = 0.7; //time gripper spits out before backing up
-    public static final double DriveBackTime = 1.2; //time robot drives back after scoring
+    public static final double DriveBackTime = .7; //time robot drives back after scoring
     public static final double DriveBackSpeed = -0.7; //speed that robot bumps back after scoring
   }
   public static class HangConstants{

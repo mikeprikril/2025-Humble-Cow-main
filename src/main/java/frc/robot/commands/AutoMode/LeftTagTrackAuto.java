@@ -62,6 +62,7 @@ public class LeftTagTrackAuto extends Command {
   @Override
   public void end(boolean interrupted) {
     timer.stop();
+    timer.reset();
   }
 
   // Returns true when the command should end.
@@ -72,6 +73,6 @@ public class LeftTagTrackAuto extends Command {
     //&&
     //Math.abs(swerveDrive.TrackReefTagX() + Constants.DrivebaseConstants.OffsetForLeft) < 2)
    // ||
-    timer.get() > 2.25;
+    timer.get() > 2.1;
   }
 }
