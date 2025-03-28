@@ -7,6 +7,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -199,7 +200,7 @@ public class RobotContainer
     autoTransfer = new SequentialCommandGroup(pick, moveUp); //sequential command group for auto transfer
 
     //Automode Chooser
-    autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = AutoBuilder.buildAutoChooser("Just Drive");
     SmartDashboard.putData("Auto Mode Choice", autoChooser);
 
     // Configure the trigger bindings
@@ -263,7 +264,7 @@ public class RobotContainer
    */
   public Command getAutonomousCommand()
   {
-    //return autoChooser.getSelected();
+    return autoChooser.getSelected();
     //return new PathPlannerAuto("Left Start - Score 2 Coral");//two Coral from left start
     //return new PathPlannerAuto("Left Start - Score Coral");//Single Coral from left start
     //return new PathPlannerAuto("Left Start - Hide");//Just cross the line and do nothing
@@ -271,7 +272,7 @@ public class RobotContainer
     //return new PathPlannerAuto("Right Start - Score Coral");//Single Coral from right start
     //return new PathPlannerAuto("Right Start - Hide");//Just cross the line and do nothing
     
-    return new PathPlannerAuto("Center Start - Score Coral");//Single Coral starting at center
+    //return new PathPlannerAuto("Center Start - Score Coral");//Single Coral starting at center
   }
 
   public void setMotorBrake(boolean brake)
