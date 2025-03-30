@@ -118,12 +118,15 @@ public final class Constants
     public static final double L3Height = 27.1;
     public static final double L4Height = 60.2;
     public static final double DontTipHeight = 46; //Height where we can drive fast because we wont tip
+    public static final double ShallowHangHeight = 30;
+    public static final double Hanging = 2;
     public static final double DontTipFactor = 0.75; //robot slows down by this much when elevator is high
     public static final double AutoUpSpeed = -.4;
     public static final double FasterUpSpeed = -.6;
     public static final double AutoDownSpeed = 0.45;
     public static final double BumpDownSpeed = 0.1;
     public static final double HoldElevatorSpeed = -.02;
+    public static final double HoldHangSpeed = 0;
 
     public static final int TransferButton = 1;
     public static final int BumpDownTestButton = 2;

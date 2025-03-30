@@ -6,6 +6,7 @@ package frc.robot.subsystems.swervedrive;
 
 import static edu.wpi.first.units.Units.Meter;
 import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.Seconds;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -149,7 +150,7 @@ public class SwerveSubsystem extends SubsystemBase
     driveRateLimiter = new SlewRateLimiter(Constants.DrivebaseConstants.DriveRateLimit);
     
     adLED = new AddressableLED(Constants.DrivebaseConstants.LEDPWMPort);
-    adLEDBuffer = new AddressableLEDBuffer(64);
+    adLEDBuffer = new AddressableLEDBuffer(60);
     adLED.setLength(adLEDBuffer.getLength());
     adLED.start();
 
@@ -256,8 +257,9 @@ double aprilID = tid.getDouble(0.0);
   LEDPattern red = LEDPattern.solid(Color.kRed);
   LEDPattern green = LEDPattern.solid(Color.kGreen);
   LEDPattern rainbow = LEDPattern.rainbow(255, 255); //all hues at full saturation and full brightness
-  Distance LEDSpacing = Meter.of(1/120);
-  LEDPattern scrollingRainbow = rainbow.scrollAtAbsoluteSpeed(MetersPerSecond.of(1), LEDSpacing);
+  LEDPattern blinky = rainbow.blink(Seconds.of(.1));
+
+
 
   if (aprilID == -1){
     Off.applyTo(adLEDBuffer);
@@ -265,21 +267,16 @@ double aprilID = tid.getDouble(0.0);
   else if (aprilID != -1 && aprilarea < 5){
     red.applyTo(adLEDBuffer);
   }
-  else if (aprilID != -1 && aprilarea > 5 
-  && 
-  ((Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforLeft - aprilx) > .5))
+  else if 
+  (((Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforLeft - aprilx) < 1))
   ||
-  (Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforRight - aprilx) > .5))
+  (Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforRight - aprilx) < 1))
+  {
+    blinky.applyTo(adLEDBuffer);
+  }
+  else 
   {
     green.applyTo(adLEDBuffer);
-  }
-  else if (aprilID != -1 && aprilarea > 5 
-  && 
-  ((Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforLeft - aprilx) < .5))
-  ||
-  (Math.abs(Constants.DrivebaseConstants.OffsetCenterCamforRight - aprilx) < .5))
-  {
-    scrollingRainbow.applyTo(adLEDBuffer);
   }
 
 

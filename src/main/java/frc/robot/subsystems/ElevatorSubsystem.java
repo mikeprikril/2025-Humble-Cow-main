@@ -120,6 +120,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     else return 1;
   }
 
+  public double ElevatorCurrent(){
+    return leftElevatorMotor.getOutputCurrent();
+  }
+
 
   
 

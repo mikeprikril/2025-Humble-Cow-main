@@ -33,10 +33,12 @@ import frc.robot.commands.HangCommand;
 import frc.robot.commands.ManualArmCommand;
 import frc.robot.commands.ManualChuteCommand;
 import frc.robot.commands.ManualElevatorCommand;
+import frc.robot.commands.MoveToHangHeight;
 import frc.robot.commands.MoveToL1;
 import frc.robot.commands.PickFromTrough;
 import frc.robot.commands.ScoreCoral;
 import frc.robot.commands.ScoreCoralFast;
+import frc.robot.commands.ShallowHang;
 import frc.robot.commands.TrackHumanLoading;
 import frc.robot.commands.TrackReefLeft;
 import frc.robot.commands.TrackReefRight;
@@ -99,6 +101,8 @@ public class RobotContainer
   private final MoveToL2 moveToL2;
   private final MoveToL3 moveToL3;
   private final MoveToL4 moveToL4;
+  private final MoveToHangHeight moveToHang;
+  private final ShallowHang shallowHang;
   private final ScoreCoral scoreCoral;
   private final ScoreCoralFast scoreFast;
   private final Tuck tuck;
@@ -189,6 +193,8 @@ public class RobotContainer
     moveToL2 = new MoveToL2(elevator, arm, panel);
     moveToL3 = new MoveToL3(elevator, arm, panel);
     moveToL4 = new MoveToL4(elevator, arm, panel);
+    moveToHang = new MoveToHangHeight(elevator, arm, operatorXbox);
+    shallowHang = new ShallowHang(elevator, arm, operatorXbox);
     scoreCoral = new ScoreCoral(elevator, arm, drivebase, panel);
     scoreFast = new ScoreCoralFast(elevator, arm, drivebase, panel);
     tuck = new Tuck(elevator, arm, panel);
@@ -240,6 +246,8 @@ public class RobotContainer
       driverXbox.rightBumper().onTrue(driveSideways);
 
       operatorXbox.y().onTrue(flatArm);
+      operatorXbox.back().onTrue(moveToHang);
+      operatorXbox.start().onTrue(shallowHang);
 
       new JoystickButton(panel, Constants.OperatorConstants.CoralStationButton).onTrue(transfer);
       new JoystickButton(panel, Constants.OperatorConstants.GetCoralButton).onTrue(autoTransfer);
